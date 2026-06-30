@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>南投縣手工藝發展協會</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      color: #333;
+      line-height: 1.8;
+      background: #faf8f3;
+    }
+
+    header {
+      background: #fff;
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .logo h1 {
+      font-size: 24px;
+      color: #5f6f4e;
+    }
+
+    .logo p {
+      font-size: 13px;
+      color: #777;
+    }
+
+    nav a {
+      margin-left: 28px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #7b8f5f;
+    }
+
+    .hero {
+      min-height: 420px;
+      padding: 90px 8%;
+      background:
+        linear-gradient(to right, rgba(250,248,243,.95), rgba(250,248,243,.55)),
+        url("https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 620px;
+    }
+
+    .hero h2 {
+      font-size: 48px;
+      color: #6f7f55;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #444;
+    }
+
+    section {
+      padding: 70px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      color: #6f7f55;
+      margin-bottom: 40px;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: #d6a94f;
+      margin: 12px auto 0;
+    }
+
+    .about {
+      background: #fff;
+    }
+
+    .about p {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .info-list {
+      background: #fff;
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .info-item {
+      display: flex;
+      margin-bottom: 18px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 12px;
+    }
+
+    .info-item strong {
+      width: 120px;
+      color: #6f7f55;
+    }
+
+    .certificate {
+      background: #fff;
+      padding: 35px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .certificate-box {
+      border: 2px solid #d9c7ad;
+      padding: 35px 20px;
+      background: #fffdf9;
+    }
+
+    .certificate-box h3 {
+      color: #6f7f55;
+      margin-bottom: 15px;
+    }
+
+    .services {
+      background: #fff;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: #faf8f3;
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 12px;
+      border: 1px solid #eee2d4;
+    }
+
+    .service-card .icon {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .service-card h3 {
+      color: #5f6f4e;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .social-card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: .2s;
+    }
+
+    .social-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .social-icon {
+      font-size: 36px;
+    }
+
+    .contact {
+      background: #fff;
+    }
+
+    .contact-box {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      background: #faf8f3;
+      padding: 35px;
+      border-radius: 12px;
+    }
+
+    footer {
+      background: #5f6f4e;
+      color: #fff;
+      padding: 40px 8%;
+      text-align: center;
+    }
+
+    footer h2 {
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      opacity: .9;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 10px;
+      }
+
+      .hero h2 {
+        font-size: 36px;
+      }
+
+      .info-grid,
+      .service-grid,
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <h1>南投縣手工藝發展協會</h1>
+      <p>Nantou County Handicraft Development Association</p>
+    </div>
+
+    <nav>
+      <a href="#about">關於本協會</a>
+      <a href="#info">基本資料</a>
+      <a href="#service">服務項目</a>
+      <a href="#social">官方社群</a>
+      <a href="#contact">聯絡我們</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>傳承技藝・創造美好</h2>
+      <p>
+        推廣手工藝文化，培育在地人才，透過教育與公益服務，
+        讓工藝走入生活，讓文化永續傳承。
+      </p>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <h2 class="section-title">關於本協會</h2>
+    <p>
+      南投縣手工藝發展協會致力於推廣地方工藝文化、人才培育、
+      社區服務及公益教育，透過課程、活動與跨領域合作，
+      促進文化傳承與地方永續發展。
+    </p>
+  </section>
+
+  <section id="info">
+    <h2 class="section-title">基本資料</h2>
+
+    <div class="info-grid">
+      <div class="info-list">
+        <div class="info-item">
+          <strong>協會名稱</strong>
+          <span>南投縣手工藝發展協會</span>
+        </div>
+
+        <div class="info-item">
+          <strong>立案字號</strong>
+          <span>南投縣政府 社會字第0970019538號</span>
+        </div>
+
+        <div class="info-item">
+          <strong>統一編號</strong>
+          <span>31867998</span>
+        </div>
+
+        <div class="info-item">
+          <strong>成立日期</strong>
+          <span>民國97年05月26日</span>
+        </div>
+
+        <div class="info-item">
+          <strong>聯絡電話</strong>
+          <span>049-1234567</span>
+        </div>
+
+        <div class="info-item">
+          <strong>Email</strong>
+          <span>ntcraft2023@gmail.com</span>
+        </div>
+
+        <div class="info-item">
+          <strong>地址</strong>
+          <span>542 南投縣草屯鎮中正路123號</span>
+        </div>
+      </div>
+
+      <div class="certificate">
+        <div class="certificate-box">
+          <h3>立案資訊</h3>
+          <p>本協會依法立案，致力推動地方工藝文化、教育推廣與公益服務。</p>
+          <br>
+          <p>建議此區可放置：</p>
+          <p>協會立案證書圖片 / 登記證明文件</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="service">
+    <h2 class="section-title">我們的服務</h2>
+
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="icon">🧵</div>
+        <h3>工藝教育推廣</h3>
+        <p>辦理工藝課程與研習，推廣在地工藝文化。</p>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">👥</div>
+        <h3>社區培力課程</h3>
+        <p>深入社區，提供多元學習課程，提升居民能力。</p>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">🌷</div>
+        <h3>婦女與樂齡培訓</h3>
+        <p>培力婦女及樂齡族群，學習技能並展現價值。</p>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">👨‍👩‍👧</div>
+        <h3>親子手作活動</h3>
+        <p>透過親子共學，增進互動與創造美好回憶。</p>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">🌿</div>
+        <h3>地方文化推廣</h3>
+        <p>結合地方特色，推動文化保存與創新發展。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="social">
+    <h2 class="section-title">官方社群</h2>
+
+    <div class="social-grid">
+      <a class="social-card" href="#" target="_blank">
+        <div class="social-icon">📘</div>
+        <div>
+          <h3>Facebook 粉絲專頁</h3>
+          <p>追蹤我們的最新消息</p>
+        </div>
+      </a>
+
+      <a class="social-card" href="#" target="_blank">
+        <div class="social-icon">💬</div>
+        <div>
+          <h3>LINE 官方帳號</h3>
+          <p>加入好友，獲得活動資訊</p>
+        </div>
+      </a>
+
+      <a class="social-card" href="#" target="_blank">
+        <div class="social-icon">▶️</div>
+        <div>
+          <h3>YouTube 頻道</h3>
+          <p>觀看活動紀錄與課程影片</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2 class="section-title">聯絡我們</h2>
+
+    <div class="contact-box">
+      <p><strong>南投縣手工藝發展協會</strong></p>
+      <p>電話：049-1234567</p>
+      <p>Email：ntcraft2023@gmail.com</p>
+      <p>地址：542 南投縣草屯鎮中正路123號</p>
+    </div>
+  </section>
+
+  <footer>
+    <h2>南投縣手工藝發展協會</h2>
+    <p>Nantou County Handicraft Development Association</p>
+    <p>© 2026 南投縣手工藝發展協會 版權所有</p>
+  </footer>
+
+  <script>
+    // 平滑捲動效果
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
