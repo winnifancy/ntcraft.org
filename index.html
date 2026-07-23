@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>社團法人南投縣手工藝發展協會</title>
-<meta name="description" content="社團法人南投縣手工藝發展協會 — 推廣手工藝文化，培育在地人才，透過教育與公益服務，讓工藝走入生活，讓文化永續傳承。">
-<link rel="icon" href="logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>關於本協會｜社團法人南投縣手工藝發展協會</title>
+  <meta name="description" content="社團法人南投縣手工藝發展協會 — 推廣手工藝文化，培育在地人才，透過教育與公益服務，讓工藝走入生活。">
+  <link rel="icon" href="assets/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
   :root{
     --ink:#262420;
     --ink-soft:#615c52;
@@ -177,7 +177,7 @@
     color:var(--paper-soft);
     overflow:hidden;
     padding:100px 0 116px;
-    background:#2a2620 url('banner.jpg') center 26% / cover no-repeat;
+    background:#2a2620 url('assets/images/banner.jpg') center 26% / cover no-repeat;
   }
   .hero::before{
     content:"";
@@ -677,51 +677,92 @@
     .construction{padding:48px 24px;}
     .footer-row{flex-direction:column; align-items:flex-start;}
   }
+
+  .page-hero{padding:58px 0 34px;background:var(--paper);border-bottom:1px solid var(--line)}
+  .page-hero .section-num{margin-bottom:12px}
+  .page-hero h1{font-size:clamp(30px,5vw,48px)}
+  body:not(.page-about) main>section{min-height:calc(100vh - 244px)}
+  .skip-link{position:absolute;left:-999px;top:8px;background:#fff;padding:10px 14px;z-index:999}
+  .skip-link:focus{left:8px}
+  .official-domain{background:var(--green);color:#fff;padding:11px 0;font-size:13px;text-align:center}
+  .official-domain strong{color:#fff}
+  .legal-identity{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--green);padding:20px 24px;margin:28px 0 0;border-radius:var(--radius)}
+  .legal-identity h3{font-size:18px;margin-bottom:8px}
+  .legal-identity p{color:var(--ink-soft)}
+  .statement-card{background:var(--green-tint);border:1px solid rgba(76,122,61,.22);padding:28px 30px;border-radius:var(--radius);font-size:18px;line-height:2}
+  .activity-photo{margin:0 0 34px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .activity-photo img{width:100%;max-height:540px;object-fit:cover}
+  .activity-photo figcaption{padding:12px 16px;color:var(--ink-soft);font-size:13px}
+  .activity-grid{margin-top:0}
+  .activity-tag{display:inline-block;margin-top:18px;color:var(--green);font-size:13px;font-weight:700}
+  .activity-follow{margin-top:34px;padding:32px;background:var(--yellow-tint);border:1px solid rgba(239,175,18,.28);text-align:center;border-radius:var(--radius)}
+  .activity-follow p{margin:10px auto 20px;color:var(--ink-soft)}
+  .footer-legal{width:100%;padding-top:14px;margin-top:14px;border-top:1px solid rgba(255,255,255,.16);font-size:12px;line-height:1.7}
+  @media(max-width:760px){.brand-text{font-size:14px}.brand-text small{display:none}.page-hero{padding:38px 0 18px}}
+
+  .official-domain{background:#f3f7f0;color:var(--green);border-bottom:1px solid rgba(76,122,61,.16);padding:9px 0;font-size:13px;text-align:center}
+  .future-section{margin-top:64px;padding:44px;background:var(--green-tint);border:1px solid rgba(76,122,61,.2);border-radius:var(--radius)}
+  .future-section h3{font-size:28px;margin-bottom:8px}.future-section>p{color:var(--ink-soft);margin-bottom:24px}
+  .future-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .future-list li{background:#fff;padding:16px 18px;border-left:3px solid var(--green);box-shadow:0 8px 24px -22px rgba(0,0,0,.5)}
+  .proof-strip,.program-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:42px}
+  .proof-strip figure,.program-photo-strip figure,.impact-gallery figure{margin:0;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}
+  .proof-strip img,.program-photo-strip img{width:100%;height:220px;object-fit:cover}
+  figure figcaption{padding:12px 14px;color:var(--ink-soft);font-size:13px}
+  .impact-intro{max-width:780px;font-size:17px;color:var(--ink-soft);margin-bottom:34px}
+  .impact-block{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;margin:0 0 56px;padding-bottom:56px;border-bottom:1px solid var(--line)}
+  .impact-block.reverse{grid-template-columns:.95fr 1.05fr}.impact-block.reverse .impact-copy{order:2}.impact-block.reverse figure{order:1}
+  .impact-block figure{margin:0}.impact-block figure img{width:100%;max-height:420px;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow)}
+  .impact-kicker{font-family:'JetBrains Mono',monospace;color:var(--clay);font-size:12px;letter-spacing:.12em}
+  .impact-copy h3{font-size:28px;margin:8px 0 14px}.impact-copy p+p{margin-top:12px}
+  .tea-charity{padding:34px;background:var(--yellow-tint);border:1px solid rgba(239,175,18,.3);border-radius:var(--radius);margin-bottom:52px}
+  .tea-charity h3{font-size:27px;margin-bottom:12px}.tea-charity p{max-width:880px}
+  .impact-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .impact-gallery img{width:100%;height:300px;object-fit:cover}
+  .impact-gallery .portrait img{object-fit:contain;background:#fbf8f2}
+  .map-wrap{margin-top:28px;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow);overflow:hidden}
+  .map-wrap iframe{display:block;width:100%;height:420px;border:0}.map-caption{padding:15px 18px;color:var(--ink-soft);font-size:14px}
+  @media(max-width:860px){.impact-block,.impact-block.reverse{grid-template-columns:1fr}.impact-block.reverse .impact-copy,.impact-block.reverse figure{order:initial}.impact-gallery{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:700px){.future-section{padding:28px 22px}.future-list,.proof-strip,.program-photo-strip,.impact-gallery{grid-template-columns:1fr}.proof-strip img,.program-photo-strip img,.impact-gallery img{height:auto}.map-wrap iframe{height:330px}}
+
 </style>
 </head>
-<body>
-
-<header class="site-header">
-  <div class="container nav-row">
-    <a href="#top" class="brand">
-      <img class="brand-mark" src="logo.png" alt="社團發人南投縣手工藝發展協會 LOGO">
-      <span class="brand-text">社團法人南投縣手工藝發展協會<small>Nantou Craft Association</small></span>
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-label="開啟選單" aria-expanded="false">
-      <span></span>
-    </button>
-    <nav class="nav-links" id="navLinks">
-      <a href="#about">關於本協會</a>
-      <a href="#programs">推廣項目</a>
-      <a href="#events">近期活動</a>
-      <a href="#social">官方社群</a>
-      <a href="#contact">聯絡我們</a>
-    </nav>
-  </div>
-</header>
-
-<main id="top">
-
-  <!-- HERO -->
-  <section class="hero weave-paper" id="hero">
+<body class="page-about">
+  <a class="skip-link" href="#main">跳至主要內容</a>
+  <header class="site-header">
+    <div class="container nav-row">
+      <a href="index.html" class="brand">
+        <img class="brand-mark" src="assets/images/logo.png" alt="南投縣手工藝發展協會 LOGO">
+        <span class="brand-text">社團法人南投縣手工藝發展協會<small>Nantou Craft Association</small></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="開啟選單" aria-expanded="false"><span></span></button>
+      <nav class="nav-links" id="navLinks" aria-label="主要導覽"><a href="index.html" class="active" aria-current="page">關於本協會</a>
+        <a href="mission.html">宗旨與任務</a>
+        <a href="programs.html">推廣項目</a>
+        <a href="impact.html">成果與公益</a>
+        <a href="social.html">官方社群</a>
+        <a href="contact.html">聯絡我們</a></nav>
+    </div>
+  </header>
+  <div class="official-domain"><div class="container">本網站（ntcraft.org）為社團法人南投縣手工藝發展協會官方網站</div></div>
+  
+  <main id="main"><section class="hero weave-paper" id="hero">
     <div class="container hero-flex">
       <div class="hero-inner">
         <span class="eyebrow">社團法人・南投縣手工藝發展協會</span>
         <h1 class="reveal">讓工藝<em>走入生活</em>，<br>讓文化<em class="alt">永續傳承</em>。</h1>
         <p class="lead reveal">推廣手工藝文化，培育在地人才，透過教育與公益服務，讓工藝走入生活，讓文化永續傳承。</p>
         <div class="hero-cta reveal">
-          <a href="#about" class="btn btn-primary">認識協會</a>
-          <a href="#contact" class="btn btn-ghost">聯絡我們</a>
+          <a href="index.html#about" class="btn btn-primary">認識協會</a>
+          <a href="contact.html" class="btn btn-ghost">聯絡我們</a>
         </div>
       </div>
       <div class="hero-visual reveal">
-        <img src="logo.png" alt="南投縣手工藝發展協會 LOGO">
+        <img src="assets/images/logo.png" alt="南投縣手工藝發展協會 LOGO">
       </div>
     </div>
   </section>
-
-  <!-- ABOUT -->
-  <section class="about" id="about">
+<section class="about" id="about">
     <div class="container">
       <div class="section-head reveal">
         <span class="section-num">01 — 關於本協會</span>
@@ -748,252 +789,65 @@
             <li><span class="k">信　箱</span><span class="v"><a href="mailto:admin@ntcraft.org">admin@ntcraft.org</a></span></li>
             <li><span class="k">立案日期</span><span class="v">民國94年11月5日</span></li>
             <li><span class="k">立案字號</span><span class="v">府社政字第09402359210號</span></li>
-            <li><span class="k">統一編號</span><span class="v">09245913</span></li>
+            <li><span class="k">統一編號</span><span class="v">09245913</span></li><li><span class="k">官方網站</span><span class="v">ntcraft.org</span></li>
           </ul>
         </div>
       </div>
 
-      <div class="mission-head reveal">
-        <h3>我們的宗旨與任務</h3>
-      </div>
 
-      <div class="mission-grid">
-        <div class="mission-card reveal">
-          <span class="tag">MISSION 01</span>
-          <h4>推廣手工藝學習</h4>
-          <p>辦理有關手工藝之研習、觀摩、講座、聯誼及解說訓練等活動，以提升民眾對手工藝的興趣和瞭解。</p>
-        </div>
-        <div class="mission-card reveal">
-          <span class="tag">MISSION 02</span>
-          <h4>促進生活休閒</h4>
-          <p>辦理促進地方民眾生活休閒等活動，豐富日常生活的美感與樂趣。</p>
-        </div>
-        <div class="mission-card reveal">
-          <span class="tag">MISSION 03</span>
-          <h4>社教與技能訓練</h4>
-          <p>配合政府政策舉辦各項社教研習、專業技能訓練，以增進生活內涵。</p>
-        </div>
-        <div class="mission-card reveal">
-          <span class="tag">MISSION 04</span>
-          <h4>公益推廣活動</h4>
-          <p>接受委託辦理有關手工藝推廣等公益活動，將工藝資源回饋社會。</p>
-        </div>
-        <div class="mission-card reveal">
-          <span class="tag">MISSION 05</span>
-          <h4>社區與家庭關懷</h4>
-          <p>重視社區人文與教育訓練服務，關心幼兒與兒童、家庭或教保服務人員福祉相關事項。</p>
-        </div>
-        <div class="mission-card reveal">
-          <span class="tag">MISSION 06</span>
-          <h4>其他宗旨事項</h4>
-          <p>其他合於本會宗旨之事項，持續因應地方需求拓展服務範疇。</p>
-        </div>
+      <div class="proof-strip reveal" aria-label="協會推廣成果照片">
+        <figure><img src="assets/images/社區樂齡服務.webp" alt="協會學員參與社區樂齡手作服務"><figcaption>社區與樂齡手作服務</figcaption></figure>
+        <figure><img src="assets/images/學員市集展售.webp" alt="協會輔導學員參與市集展示作品"><figcaption>學員成果展售與市集實踐</figcaption></figure>
+        <figure><img src="assets/images/公益感謝狀合輯.webp" alt="協會參與公益服務獲頒感謝狀"><figcaption>公益合作與服務肯定</figcaption></figure>
       </div>
+      <section class="future-section reveal" aria-labelledby="future-title">
+        <span class="section-num">2025—2027</span>
+        <h3 id="future-title">中期經營目標（114～116年）</h3>
+        <p>持續朝向中期經營目標邁進，深化訓練品質、人才培育、社區服務與公益行動。</p>
+        <ul class="future-list">
+          <li>持續完善訓練品質管理，朝 TTQS 銀牌目標邁進。</li>
+          <li>推動第二專長與進階技能訓練，協助學員銜接專業認證。</li>
+          <li>發展品牌化、系統化的手工藝課程與人才培育模式。</li>
+          <li>持續拓展社區照顧關懷據點及樂齡學習合作。</li>
+          <li>持續推動「巧手做公益」，讓工藝學習成果回饋社會。</li>
+        </ul>
+      </section>
     </div>
-  </section>
-
-  <!-- PROGRAMS -->
-  <section class="programs" id="programs">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-num">02 — 推廣項目</span>
-        <h2>從課程到公益，工藝落地生活的方式</h2>
-        <p>圍繞宗旨任務，協會規劃多元推廣項目，串連學習、休閒、社教與公益，陪伴不同年齡層走進手工藝的世界。</p>
-      </div>
-
-      <div class="program-grid">
-        <div class="program-card reveal">
-          <span class="program-no">PROGRAM / 01</span>
-          <h3>手工藝研習課程</h3>
-          <p>毛線編織、染布、金屬工藝、複合媒材...等基礎與進階課程，培養在地工藝人才。</p>
-        </div>
-        <div class="program-card reveal">
-          <span class="program-no">PROGRAM / 02</span>
-          <h3>觀摩交流講座</h3>
-          <p>邀請工藝職人與在地創作者分享經驗，促進跨領域對話與觀摩。</p>
-        </div>
-        <div class="program-card reveal">
-          <span class="program-no">PROGRAM / 03</span>
-          <h3>社區公益服務</h3>
-          <p>受託辦理工藝推廣公益活動，將技藝帶入社區角落。</p>
-        </div>
-        <div class="program-card reveal">
-          <span class="program-no">PROGRAM / 04</span>
-          <h3>親子家庭工作坊</h3>
-          <p>關懷幼兒、兒童與家庭，設計適合親子共學的手作體驗。</p>
-        </div>
-        <div class="program-card reveal">
-          <span class="program-no">PROGRAM / 05</span>
-          <h3>教保人員培力</h3>
-          <p>協助教保服務人員增能研習，將工藝融入教學現場。</p>
-        </div>
-        <div class="program-card reveal">
-          <span class="program-no">PROGRAM / 06</span>
-          <h3>專業技能訓練</h3>
-          <p>配合政府社教政策辦理專業技能訓練，銜接生活與職能發展。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EVENTS -->
-  <section class="events" id="events">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-num">03 — 近期活動</span>
-        <h2>近期活動與課程</h2>
-      </div>
-
-      <div class="construction reveal">
-        <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#B23B22" stroke-width="1.6" stroke-linejoin="round"/>
-            <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#B23B22" stroke-width="1.6" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3>內容建構中</h3>
-        <p>近期活動頁面正在整理更新，完成後將公布最新課程與活動資訊，敬請耐心等候。</p>
-        <a href="https://www.facebook.com/Carft.Assn/?locale=zh_TW" target="_blank" rel="noopener">前往粉絲團查看最新動態 →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- SOCIAL -->
-  <section class="social" id="social">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-num">04 — 官方社群</span>
-        <h2>追蹤我們，掌握第一手消息</h2>
-      </div>
-
-      <a class="social-card reveal" href="https://www.facebook.com/Carft.Assn/?locale=zh_TW" target="_blank" rel="noopener">
-        <span class="social-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z" fill="#ffffff"/>
-          </svg>
-        </span>
-        <span class="social-copy">
-          <h3>南投縣手工藝發展協會｜Facebook 粉絲專頁</h3>
-          <p>課程資訊、活動花絮、公益服務最新動態，歡迎加入我們的粉絲團。</p>
-        </span>
-        <span class="btn btn-primary" style="white-space:nowrap;">前往粉絲團</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-num">05 — 聯絡我們</span>
-        <h2>歡迎來信、來電，或親自走訪協會</h2>
-        <p>無論是課程洽詢、公益合作或一般詢問，都歡迎與我們聯繫。</p>
-      </div>
-
-      <div class="contact-grid reveal">
-        <div class="contact-cell">
-          <span class="k">ADDRESS</span>
-          <div class="v">南投縣南投市民族路609巷29號2樓</div>
-          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E5%8D%97%E6%8A%95%E7%B8%A3%E5%8D%97%E6%8A%95%E5%B8%82%E6%B0%91%E6%97%8F%E8%B7%AF609%E5%B7%B729%E8%99%9F2%E6%A8%93" target="_blank" rel="noopener">在 Google 地圖開啟 →</a>
-        </div>
-        <div class="contact-cell">
-          <span class="k">PHONE</span>
-          <div class="v copy-row">
-            <a href="tel:0492203321">049-2203321</a>
-            <button class="copy-btn" data-copy="049-2203321">複製號碼</button>
-          </div>
-        </div>
-        <div class="contact-cell">
-          <span class="k">EMAIL</span>
-          <div class="v copy-row">
-            <a href="mailto:admin@ntcraft.org">admin@ntcraft.org</a>
-            <button class="copy-btn" data-copy="admin@ntcraft.org">複製信箱</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="container footer-row">
-    <span>© <span id="year"></span> 社團法人南投縣手工藝發展協會</span>
+  </section></main>
+  <footer><div class="container footer-row">
+    <span>© <span id="year"></span> 社團法人南投縣手工藝發展協會 All Rights Reserved.</span>
     <span>南投縣南投市民族路609巷29號2樓｜049-2203321</span>
-  </div>
-</footer>
-
-<script>
-  // 年份
+    <span class="footer-legal">本會立案日期：民國94年11月5日｜立案字號：府社政字第09402359210號｜統一編號：09245913<br>官方網站：ntcraft.org｜本網站由社團法人南投縣手工藝發展協會管理與維護</span>
+  </div></footer>
+  <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-
-  // 手機選單
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
   navToggle.addEventListener('click', () => {
     const open = navLinks.classList.toggle('open');
     navToggle.classList.toggle('open', open);
-    navToggle.setAttribute('aria-expanded', open);
+    navToggle.setAttribute('aria-expanded', String(open));
   });
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      navToggle.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', false);
-    });
-  });
-
-  // 導覽列當前區塊高亮
-  const sections = document.querySelectorAll('main section[id]');
-  const navAnchors = document.querySelectorAll('.nav-links a');
-  const setActive = () => {
-    let current = '';
-    sections.forEach(sec => {
-      const rect = sec.getBoundingClientRect();
-      if (rect.top <= 100 && rect.bottom >= 100) current = sec.id;
-    });
-    navAnchors.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
-  };
-  document.addEventListener('scroll', setActive, { passive: true });
-  setActive();
-
-  // 捲動顯現動畫
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
+    const io = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+    }), { threshold: .12 });
     revealEls.forEach(el => io.observe(el));
-  } else {
-    revealEls.forEach(el => el.classList.add('in'));
-  }
-
-  // 複製聯絡資訊
-  document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const text = btn.getAttribute('data-copy');
-      try {
-        await navigator.clipboard.writeText(text);
-        const original = btn.textContent;
-        btn.textContent = '已複製 ✓';
-        btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = original;
-          btn.classList.remove('copied');
-        }, 1800);
-      } catch (e) {
-        window.prompt('請手動複製：', text);
-      }
-    });
-  });
+  } else revealEls.forEach(el => el.classList.add('in'));
+  document.querySelectorAll('.copy-btn').forEach(btn => btn.addEventListener('click', async () => {
+    const value = btn.getAttribute('data-copy');
+    try {
+      await navigator.clipboard.writeText(value);
+      const old = btn.textContent; btn.textContent = '已複製 ✓'; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = old; btn.classList.remove('copied'); }, 1800);
+    } catch { window.prompt('請手動複製：', value); }
+  }));
 </script>
-
 </body>
 </html>
