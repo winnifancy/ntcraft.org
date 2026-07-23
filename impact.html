@@ -720,10 +720,14 @@
   .impact-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .impact-gallery img{width:100%;height:300px;object-fit:cover}
   .impact-gallery .portrait img{object-fit:contain;background:#fbf8f2}
+  .media-feature{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:30px;align-items:center;margin-top:60px;padding:34px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .media-feature figure{margin:0}.media-feature img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+  .media-feature h3{font-size:28px;margin:8px 0 12px}.media-feature p{color:var(--ink-soft)}
   .map-wrap{margin-top:28px;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow);overflow:hidden}
   .map-wrap iframe{display:block;width:100%;height:420px;border:0}.map-caption{padding:15px 18px;color:var(--ink-soft);font-size:14px}
   @media(max-width:860px){.impact-block,.impact-block.reverse{grid-template-columns:1fr}.impact-block.reverse .impact-copy,.impact-block.reverse figure{order:initial}.impact-gallery{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:700px){.future-section{padding:28px 22px}.future-list,.proof-strip,.program-photo-strip,.impact-gallery{grid-template-columns:1fr}.proof-strip img,.program-photo-strip img,.impact-gallery img{height:auto}.map-wrap iframe{height:330px}}
+  @media(max-width:760px){.media-feature{grid-template-columns:1fr;padding:22px}}
 
 </style>
 </head>
@@ -748,7 +752,6 @@
   
     <div class="page-hero">
       <div class="container">
-        <span class="section-num">南投縣手工藝發展協會</span>
         <h1>成果與公益行動</h1>
       </div>
     </div>
@@ -779,11 +782,23 @@
     <div class="impact-gallery">
       <figure class="reveal"><img src="assets/images/學員成果合照.webp" alt="協會學員展示手工藝學習成果"><figcaption>學員作品完成與成果交流</figcaption></figure>
       <figure class="reveal"><img src="assets/images/協會市集攤位.webp" alt="南投縣手工藝發展協會市集展售攤位"><figcaption>協會帶領學員參與市集展售</figcaption></figure>
+      <figure class="reveal"><img src="assets/images/市集手作示範.webp" alt="協會於市集現場進行手作示範與民眾交流"><figcaption>市集現場手作示範與民眾交流</figcaption></figure>
       <figure class="reveal portrait"><img src="assets/images/公益感謝狀-保暖套90份.webp" alt="協會協助製作保暖套90份公益感謝狀"><figcaption>協助製作保暖套90份，投入公益服務</figcaption></figure>
-      <figure class="reveal"><img src="assets/images/公益感謝狀合輯.webp" alt="協會歷年公益活動感謝狀合輯"><figcaption>持續參與公益製作與捐贈</figcaption></figure>
+      <figure class="reveal"><img src="assets/images/社區文化服務感謝狀.webp" alt="南投縣地利國民小學致贈協會的社區文化服務感謝狀"><figcaption>社區文化服務與合作肯定</figcaption></figure>
       <figure class="reveal"><img src="assets/images/公益合作感謝狀.webp" alt="公益團體致贈協會的感謝狀"><figcaption>公益合作單位的服務肯定</figcaption></figure>
-      <figure class="reveal"><img src="assets/images/學員展售實踐.webp" alt="協會學員於市集展示手工作品"><figcaption>學員將學習成果帶入公開展售現場</figcaption></figure>
+      <figure class="reveal"><img src="assets/images/協會戶外展售.webp" alt="南投縣手工藝發展協會參與戶外工藝展售活動"><figcaption>協會參與戶外工藝展售活動</figcaption></figure>
+      <figure class="reveal"><img src="assets/images/樂齡手作陪伴.webp" alt="協會講師陪伴樂齡長者進行手作活動"><figcaption>樂齡手作陪伴與社區服務</figcaption></figure>
     </div>
+    <article class="media-feature reveal" aria-labelledby="media-title">
+      <figure>
+        <img src="assets/images/職訓成果媒體報導.webp" alt="報紙刊登南投縣手工藝發展協會職訓成果展報導">
+      </figure>
+      <div>
+        <span class="section-num">MEDIA COVERAGE</span>
+        <h3 id="media-title">職訓成果獲媒體報導</h3>
+        <p>協會辦理多項手工藝職能訓練，陪伴學員累積專業技能與作品成果；相關成果展及培訓成效曾獲報紙刊登報導，呈現協會長期投入人才培育的成果。</p>
+      </div>
+    </article>
   </div></section></main>
   <footer><div class="container footer-row">
     <span>© <span id="year"></span> 社團法人南投縣手工藝發展協會 All Rights Reserved.</span>
