@@ -747,6 +747,10 @@ layout: null
   .news-meta b{color:var(--ink);font-weight:700;margin-right:6px;}
   .news-card .summary{font-size:14.5px;color:var(--ink-soft);}
   .ext-note{font-size:13px;color:var(--ink-soft);margin:14px 0 0;}
+    .btn-disabled{background:#eee;color:#777;cursor:default;border-color:transparent;}
+  .btn-disabled:hover{transform:none;}
+  .news-tag.draft{background:#262420;color:#fff;}
+  .news-tag + .news-tag{margin-left:6px;}
   .news-card .actions{margin-top:auto;padding-top:8px;display:flex;gap:10px;flex-wrap:wrap;}
   .news-card .btn{padding:10px 20px;font-size:14px;}
   .btn-line{border-color:var(--line);color:var(--ink);background:#fff;}
@@ -831,10 +835,10 @@ layout: null
         <h2>近期課程與活動</h2>
         <p>看到想參加的課程，點「報名這堂課」就能線上報名，協會會再與您聯繫確認。</p>
       </div>
-      {% assign items = site.news | sort: "date" | reverse %}
+      {% assign items = site.news | where_exp: "n", "n.draft != true" | sort: "date" | reverse %}
       {% if items.size == 0 %}<p class="news-empty">目前沒有新的消息，歡迎<a href="signup.html">填寫報名表</a>告訴我們你想上的課程。</p>{% endif %}
       {% for n in items %}{% assign ext = '' %}{% if n.signup_url and n.signup_url != '' %}{% assign ext = n.signup_url %}{% elsif n.course_code and n.course_code != '' %}{% capture ext %}https://ojt.wda.gov.tw/ClassSearch/Detail?OCID={{ n.course_code | strip }}&plantype=1{% endcapture %}{% endif %}
-      <article class="news-detail{% unless n.poster and n.poster != "" %} no-img{% endunless %}" id="{{ n.id | split: '/' | last }}" data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}">
+      <article class="news-detail{% unless n.poster and n.poster != "" %} no-img{% endunless %}" id="{{ n.id | split: '/' | last }}" data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}" data-signup-start="{{ n.signup_start | date: '%Y-%m-%d' }}" data-signup-end="{{ n.signup_end | date: '%Y-%m-%d' }}">
         {% if n.poster and n.poster != '' %}<img src="{{ n.poster | relative_url }}" alt="{{ n.title | escape }}" loading="lazy">{% endif %}
         <div>
           <span class="news-tag{% if n.category == '課程' %} course{% endif %}">{{ n.category | default: "消息" }}</span>
@@ -843,6 +847,7 @@ layout: null
             {% if n.event_date and n.event_date != '' %}<li><b>日期</b>{{ n.event_date | date: "%Y/%m/%d" }}{% if n.event_end and n.event_end != "" and n.event_end != n.event_date %} – {{ n.event_end | date: "%Y/%m/%d" }}{% endif %}{% if n.event_time and n.event_time != '' %}　{{ n.event_time }}{% endif %}</li>{% endif %}
             {% if n.location and n.location != '' %}<li><b>地點</b>{{ n.location }}</li>{% endif %}
             {% if n.fee and n.fee != '' %}<li><b>費用</b>{{ n.fee }}</li>{% endif %}
+              {% if n.signup_end and n.signup_end != '' %}<li><b>報名</b>{% if n.signup_start and n.signup_start != '' %}{{ n.signup_start | date: "%Y/%m/%d" }} – {% else %}即日起至 {% endif %}{{ n.signup_end | date: "%Y/%m/%d" }}</li>{% elsif n.signup_start and n.signup_start != '' %}<li><b>報名</b>{{ n.signup_start | date: "%Y/%m/%d" }} 起</li>{% endif %}
               {% if n.course_code and n.course_code != '' %}<li><b>課程代碼</b>{{ n.course_code }}</li>{% endif %}
             <li><b>發布</b>{{ n.date | date: "%Y/%m/%d" }}</li>
           </ul>
@@ -900,6 +905,23 @@ layout: null
         const tag = el.querySelector('.news-tag'); if (tag) { tag.textContent = '已結束'; tag.className = 'news-tag ended'; }
         el.querySelectorAll('.js-signup').forEach(b => b.remove());
       }
+    });
+  })();
+
+  // 依報名起訖日：還沒開始→顯示開放日期；已截止→顯示「報名已截止」
+  (function(){
+    const today = new Date(); today.setHours(0,0,0,0);
+    const fmt = d => d.replace(/-/g, '/');
+    document.querySelectorAll('[data-signup-start],[data-signup-end]').forEach(el => {
+      const s = el.getAttribute('data-signup-start'), e = el.getAttribute('data-signup-end');
+      let msg = '';
+      if (e && new Date(e + 'T23:59:59') < today) msg = '報名已截止';
+      else if (s && new Date(s + 'T00:00:00') > today) msg = fmt(s) + ' 開放報名';
+      if (!msg) return;
+      el.querySelectorAll('.js-signup').forEach(b => {
+        const span = document.createElement('span');
+        span.className = 'btn btn-disabled'; span.textContent = msg; b.replaceWith(span);
+      });
     });
   })();
 </script>

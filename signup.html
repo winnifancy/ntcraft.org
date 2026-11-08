@@ -821,9 +821,9 @@ layout: null
           <label for="f-course">想參加的課程／活動<span class="req">*</span></label>
           <select id="f-course" name="course" required>
             <option value="">請選擇</option>
-            {% assign open = site.news | where: "signup", true | sort: "date" | reverse %}
+            {% assign open = site.news | where: "signup", true | where_exp: "n", "n.draft != true" | sort: "date" | reverse %}
             {% if open.size > 0 %}<optgroup label="近期開課">{% for n in open %}{% if n.signup_url and n.signup_url != '' %}{% continue %}{% endif %}{% if n.course_code and n.course_code != '' %}{% continue %}{% endif %}
-              <option data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}">{{ n.title }}</option>{% endfor %}
+              <option data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}" data-signup-start="{{ n.signup_start | date: '%Y-%m-%d' }}" data-signup-end="{{ n.signup_end | date: '%Y-%m-%d' }}">{{ n.title }}</option>{% endfor %}
             </optgroup>{% endif %}
             <optgroup label="其他想上的課程">
             <option>毛線編織</option>
@@ -932,6 +932,7 @@ layout: null
     const sel = document.getElementById('f-course');
     const today = new Date(); today.setHours(0,0,0,0);
     sel.querySelectorAll('option[data-end]').forEach(o => { const d=o.dataset.end; if (d && new Date(d+'T23:59:59') < today) o.remove(); });
+    sel.querySelectorAll('option[data-signup-end],option[data-signup-start]').forEach(o => { const s=o.dataset.signupStart, e=o.dataset.signupEnd; if ((e && new Date(e+'T23:59:59') < today) || (s && new Date(s+'T00:00:00') > today)) o.remove(); });
     sel.querySelectorAll('optgroup').forEach(g => { if (!g.children.length) g.remove(); });
     const want = new URLSearchParams(location.search).get('course');
     if (want) {
