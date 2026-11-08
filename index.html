@@ -788,6 +788,7 @@ layout: null
 
   /* ---------- Facebook 按鈕 ---------- */
   .nav-fb{flex:none;margin-left:12px;width:40px;height:40px;border-radius:50%;background:#1877F2;color:#fff;display:inline-flex;align-items:center;justify-content:center;transition:transform .25s var(--ease), background .25s var(--ease);}
+  @media (min-width:721px){ .nav-links{margin-left:auto;} }
   .nav-fb:hover{background:#0f5fd0;transform:translateY(-1px);}
   .nav-fb svg{width:22px;height:22px;}
   .footer-fb{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:700;text-decoration:none;font-family:'Noto Sans TC', sans-serif;font-size:13.5px;}
@@ -810,7 +811,6 @@ layout: null
       <button class="nav-toggle" id="navToggle" aria-label="開啟選單" aria-expanded="false"><span></span></button>
       <nav class="nav-links" id="navLinks" aria-label="主要導覽"><a href="index.html" class="active" aria-current="page">關於本協會</a>
         <a href="news.html">最新消息</a>
-        <a href="mission.html">宗旨與任務</a>
         <a href="programs.html">推廣項目</a>
         <a href="impact.html">成果與公益</a>
         <a href="contact.html">聯絡我們</a></nav>
@@ -918,7 +918,29 @@ layout: null
         </ul>
       </section>
     </div>
-  </section></main>
+  </section>
+<section class="about mission-page" id="mission" style="border-top:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-num">宗旨與任務</span>
+      <h2>以工藝連結人、生活與地方文化</h2>
+      <p>本會以推廣手工藝、培育人才、促進生活美學及投入公益教育為核心，持續回應社區、家庭與不同年齡層的學習需求。</p>
+    </div>
+    <div class="mission-head reveal"><h3>本會宗旨</h3></div>
+    <div class="statement-card reveal">
+      <p>推廣及傳承手工藝技能，整合公益資源與文化教育，建立南投縣具專業、公信力與影響力的手工藝培訓與推廣平台。</p>
+    </div>
+    <div class="mission-head reveal"><h3>主要任務</h3></div>
+    <div class="mission-grid">
+      <div class="mission-card reveal"><span class="tag">MISSION 01</span><h4>推廣手工藝學習</h4><p>辦理手工藝研習、觀摩、講座、聯誼及解說訓練，提升民眾對工藝的興趣與理解。</p></div>
+      <div class="mission-card reveal"><span class="tag">MISSION 02</span><h4>促進生活美學</h4><p>辦理地方生活休閒活動，讓工藝融入日常，豐富民眾生活內涵。</p></div>
+      <div class="mission-card reveal"><span class="tag">MISSION 03</span><h4>社教與技能培力</h4><p>配合政府政策辦理社教研習與專業技能訓練，支持人才持續學習。</p></div>
+      <div class="mission-card reveal"><span class="tag">MISSION 04</span><h4>公益推廣服務</h4><p>接受委託辦理手工藝推廣及公益活動，讓工藝資源進入社區。</p></div>
+      <div class="mission-card reveal"><span class="tag">MISSION 05</span><h4>社區與家庭關懷</h4><p>關注社區人文、幼兒與兒童、家庭、教保人員及樂齡族群的教育與福祉。</p></div>
+      <div class="mission-card reveal"><span class="tag">MISSION 06</span><h4>文化永續傳承</h4><p>促進世代交流與地方文化延續，推動符合本會宗旨的相關服務。</p></div>
+    </div>
+  </div>
+</section></main>
   <footer><div class="container footer-row">
     <span>© <span id="year"></span> 社團法人南投縣手工藝發展協會 All Rights Reserved.</span>
     <span>南投縣南投市民族路609巷29號2樓｜049-2203321</span>

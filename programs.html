@@ -794,6 +794,7 @@
 
   /* ---------- Facebook 按鈕 ---------- */
   .nav-fb{flex:none;margin-left:12px;width:40px;height:40px;border-radius:50%;background:#1877F2;color:#fff;display:inline-flex;align-items:center;justify-content:center;transition:transform .25s var(--ease), background .25s var(--ease);}
+  @media (min-width:721px){ .nav-links{margin-left:auto;} }
   .nav-fb:hover{background:#0f5fd0;transform:translateY(-1px);}
   .nav-fb svg{width:22px;height:22px;}
   .footer-fb{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:700;text-decoration:none;font-family:'Noto Sans TC', sans-serif;font-size:13.5px;}
@@ -816,7 +817,6 @@
       <button class="nav-toggle" id="navToggle" aria-label="開啟選單" aria-expanded="false"><span></span></button>
       <nav class="nav-links" id="navLinks" aria-label="主要導覽"><a href="index.html">關於本協會</a>
         <a href="news.html">最新消息</a>
-        <a href="mission.html">宗旨與任務</a>
         <a href="programs.html" class="active" aria-current="page">推廣項目</a>
         <a href="impact.html">成果與公益</a>
         <a href="contact.html">聯絡我們</a></nav>
