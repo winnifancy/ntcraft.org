@@ -1,0 +1,75 @@
+# Pages CMS 後台設定（https://app.pagescms.org）
+media:
+  input: assets/images/news
+  output: /assets/images/news
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: news
+    label: 最新消息／課程
+    type: collection
+    path: _news
+    filename: "{year}-{month}-{day}-{primary}.md"
+    format: yaml-frontmatter
+    view:
+      fields: [title, category, date, published]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: 標題（課程或活動名稱）
+        type: string
+        required: true
+      - name: category
+        label: 類別
+        type: select
+        default: 課程
+        options:
+          values: [課程, 活動, 公告]
+      - name: date
+        label: 發布日期（決定排列順序，新的在前）
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: event_date
+        label: 上課／活動日期（公告可留空）
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: event_end
+        label: 結束日期（只有一天可留空）
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: event_time
+        label: 時間（例如：每週三 14:00–16:00）
+        type: string
+      - name: location
+        label: 地點
+        type: string
+      - name: fee
+        label: 費用（例如：免費、800 元含材料）
+        type: string
+      - name: poster
+        label: 海報或照片
+        type: image
+      - name: summary
+        label: 簡短介紹（顯示在卡片上，1～2 句）
+        type: text
+      - name: signup
+        label: 開放線上報名（打勾會出現「報名這堂課」按鈕）
+        type: boolean
+        default: true
+      - name: published
+        label: 顯示在網站上（取消打勾＝先存草稿）
+        type: boolean
+        default: true
+      - name: body
+        label: 詳細內容
+        type: rich-text

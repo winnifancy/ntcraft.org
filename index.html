@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
@@ -732,6 +735,56 @@
   @media(max-width:860px){.impact-block,.impact-block.reverse{grid-template-columns:1fr}.impact-block.reverse .impact-copy,.impact-block.reverse figure{order:initial}.impact-gallery{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:700px){.future-section{padding:28px 22px}.future-list,.proof-strip,.program-photo-strip,.impact-gallery{grid-template-columns:1fr}.proof-strip img,.program-photo-strip img,.impact-gallery img{height:auto}.map-wrap iframe{height:330px}}
 
+
+  /* ---------- 最新消息卡片 ---------- */
+  .news-list{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .news-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);}
+  .news-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--yellow-tint);}
+  .news-card .body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .news-tag{align-self:flex-start;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--green-tint);color:var(--green);}
+  .news-tag.course{background:var(--clay-tint);color:var(--clay);}
+  .news-tag.ended{background:#eee;color:#777;}
+  .news-card h3{font-size:19px;line-height:1.45;color:var(--ink);}
+  .news-meta{list-style:none;padding:0;margin:0;font-size:14px;color:var(--ink-soft);display:grid;gap:4px;}
+  .news-meta b{color:var(--ink);font-weight:700;margin-right:6px;}
+  .news-card .summary{font-size:14.5px;color:var(--ink-soft);}
+  .news-card .actions{margin-top:auto;padding-top:8px;display:flex;gap:10px;flex-wrap:wrap;}
+  .news-card .btn{padding:10px 20px;font-size:14px;}
+  .btn-line{border-color:var(--line);color:var(--ink);background:#fff;}
+  .btn-line:hover{border-color:var(--clay);color:var(--clay);}
+  .news-empty{padding:28px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--ink-soft);}
+  .news-detail{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;margin-top:28px;display:grid;grid-template-columns:320px 1fr;gap:30px;scroll-margin-top:100px;}
+  .news-detail img{width:100%;border-radius:var(--radius);display:block;}
+  .news-detail h2{font-size:clamp(22px,3vw,28px);margin:10px 0 14px;}
+  .news-detail .content{margin-top:16px;line-height:1.9;color:var(--ink);}
+  .news-detail .content p{margin:0 0 12px;}
+  .news-detail .content img{max-width:100%;height:auto;}
+  .news-detail .actions{margin-top:18px;}
+  .news-detail.no-img{grid-template-columns:1fr;}
+  .latest-news{background:var(--paper);}
+  .latest-news .more{margin-top:28px;text-align:center;}
+  .programs-cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;padding:26px;background:var(--yellow-tint);border-radius:var(--radius);text-align:center;}
+  .programs-cta p{margin:0;font-weight:700;color:var(--ink);}
+  @media (max-width:920px){ .news-list{grid-template-columns:repeat(2,1fr);} .news-detail{grid-template-columns:1fr;} }
+  @media (max-width:640px){ .news-list{grid-template-columns:1fr;} .news-detail{padding:22px;} }
+
+  /* ---------- 報名按鈕 / 最新消息 ---------- */
+  .nav-cta{
+    flex:none;margin-left:10px;display:inline-flex;align-items:center;gap:6px;
+    padding:10px 20px;border-radius:99px;background:var(--clay);color:#fff !important;
+    font-size:14.5px;font-weight:700;text-decoration:none;white-space:nowrap;
+    box-shadow:0 8px 20px -10px rgba(178,59,34,.7);
+    transition:background .25s var(--ease), transform .25s var(--ease);
+  }
+  .nav-cta:hover{background:#94301b;transform:translateY(-1px);}
+  @media (max-width:1180px){ .nav-links{gap:2px;} .nav-links a{padding:10px 9px;font-size:14px;} .nav-links a::after{left:9px;right:9px;} }
+  @media (max-width:1000px){ .brand-text small{display:none;} .brand-text{font-size:15px;} }
+  @media (max-width:900px) and (min-width:721px){ .brand-text{display:none;} }
+  @media (max-width:720px){
+    .nav-cta{order:2;margin-left:auto;margin-right:10px;padding:8px 14px;font-size:14px;}
+    .nav-toggle{order:3;}
+  }
+  @media (max-width:400px){ .brand-text{font-size:13px;} .nav-cta{padding:8px 11px;margin-right:6px;} .brand{gap:8px;} }
 </style>
 </head>
 <body class="page-about">
@@ -744,11 +797,13 @@
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="開啟選單" aria-expanded="false"><span></span></button>
       <nav class="nav-links" id="navLinks" aria-label="主要導覽"><a href="index.html" class="active" aria-current="page">關於本協會</a>
+        <a href="news.html">最新消息</a>
         <a href="mission.html">宗旨與任務</a>
         <a href="programs.html">推廣項目</a>
         <a href="impact.html">成果與公益</a>
         <a href="social.html">官方社群</a>
         <a href="contact.html">聯絡我們</a></nav>
+      <a href="signup.html" class="nav-cta">我要報名</a>
     </div>
   </header>
   <div class="official-domain"><div class="container">本網站（ntcraft.org）為社團法人南投縣手工藝發展協會官方網站</div></div>
@@ -761,12 +816,43 @@
         <p class="lead reveal">推廣手工藝文化，培育在地人才，透過教育與公益服務，讓工藝走入生活，讓文化永續傳承。</p>
         <div class="hero-cta reveal">
           <a href="index.html#about" class="btn btn-primary">認識協會</a>
-          <a href="contact.html" class="btn btn-ghost">聯絡我們</a>
+          <a href="news.html" class="btn btn-ghost">近期課程報名</a>
         </div>
       </div>
       <div class="hero-visual reveal">
         <img src="assets/images/logo.png" alt="南投縣手工藝發展協會 LOGO">
       </div>
+    </div>
+  </section>
+<section class="latest-news" id="latest-news">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-num">NEWS — 最新消息</span>
+        <h2>近期課程與活動</h2>
+      </div>
+      {% assign items = site.news | sort: "date" | reverse %}
+      {% if items.size == 0 %}<p class="news-empty">新的課程即將公布，也歡迎先<a href="signup.html">填寫報名表</a>告訴我們你想上的課程。</p>{% endif %}
+      <div class="news-list">
+        {% for n in items limit:3 %}{% assign is_course = false %}{% if n.category == "課程" %}{% assign is_course = true %}{% endif %}
+        <article class="news-card reveal" data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}">
+          {% if n.poster and n.poster != '' %}<img src="{{ n.poster | relative_url }}" alt="{{ n.title | escape }}" loading="lazy">{% endif %}
+          <div class="body">
+            <span class="news-tag{% if is_course %} course{% endif %}">{{ n.category | default: "消息" }}</span>
+            <h3>{{ n.title }}</h3>
+            <ul class="news-meta">
+              {% if n.event_date and n.event_date != '' %}<li><b>日期</b>{{ n.event_date | date: "%Y/%m/%d" }}{% if n.event_end and n.event_end != "" and n.event_end != n.event_date %} – {{ n.event_end | date: "%m/%d" }}{% endif %}{% if n.event_time and n.event_time != '' %}　{{ n.event_time }}{% endif %}</li>{% endif %}
+              {% if n.location and n.location != '' %}<li><b>地點</b>{{ n.location }}</li>{% endif %}
+              {% if n.fee and n.fee != '' %}<li><b>費用</b>{{ n.fee }}</li>{% endif %}
+            </ul>
+            {% if n.summary and n.summary != '' %}<p class="summary">{{ n.summary }}</p>{% endif %}
+            <div class="actions">
+              {% if n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}">報名這堂課</a>{% endif %}
+              <a class="btn btn-line" href="news.html#{{ n.id | split: '/' | last }}">看詳細</a>
+            </div>
+          </div>
+        </article>{% endfor %}
+      </div>
+      <div class="more"><a class="btn btn-line" href="news.html">看全部消息 →</a></div>
     </div>
   </section>
 <section class="about" id="about">
@@ -855,6 +941,19 @@
       setTimeout(() => { btn.textContent = old; btn.classList.remove('copied'); }, 1800);
     } catch { window.prompt('請手動複製：', value); }
   }));
+
+  // 活動日期過了就自動標「已結束」並隱藏報名按鈕
+  (function(){
+    const today = new Date(); today.setHours(0,0,0,0);
+    document.querySelectorAll('[data-end]').forEach(el => {
+      const d = el.getAttribute('data-end'); if (!d) return;
+      const end = new Date(d + 'T23:59:59');
+      if (end < today) {
+        const tag = el.querySelector('.news-tag'); if (tag) { tag.textContent = '已結束'; tag.className = 'news-tag ended'; }
+        el.querySelectorAll('.js-signup').forEach(b => b.remove());
+      }
+    });
+  })();
 </script>
 </body>
 </html>
