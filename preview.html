@@ -821,6 +821,15 @@ layout: null
   .news-meta .m-signup{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 11l3 3 8-8'/%3E%3Cpath d='M20 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11'/%3E%3C/svg%3E");}
   .news-meta .m-code{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9h16M4 15h16M10 3 8 21M16 3l-2 18'/%3E%3C/svg%3E");}
   @media (max-width:640px){ .news-detail .news-meta li{grid-template-columns:1fr;gap:2px;padding:10px 14px;} }
+    .meta-box > summary{display:none;}
+  @media (max-width:640px){
+    .meta-box > summary{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding:12px 16px;border:1px solid #e6e1d8;border-radius:12px;background:#fdfcf9;font-weight:700;cursor:pointer;list-style:none;}
+    .meta-box > summary::-webkit-details-marker{display:none;}
+    .meta-box > summary::after{content:'展開 ▾';font-weight:500;font-size:14px;color:var(--green);}
+    .meta-box[open] > summary{border-radius:12px 12px 0 0;border-bottom:0;}
+    .meta-box[open] > summary::after{content:'收合 ▴';}
+    .meta-box[open] .news-meta{margin-top:0;border-radius:0 0 12px 12px;}
+  }
   </style>
 </head>
 <body class="page-contact">
@@ -864,13 +873,14 @@ layout: null
           <div class="news-top"><span class="news-tag{% if n.category == '課程' %} course{% endif %}">{{ n.category | default: "消息" }}</span>{% if n.draft == true %}<span class="news-tag draft">草稿・未公開</span>{% endif %}{% if n.author and n.author != "" %}<span class="news-tag">{{ n.author }}</span>{% endif %}
           <span class="news-date">發布 {{ n.date | date: "%Y/%m/%d" }}</span></div>
           <h2>{{ n.title }}</h2>
+          <details class="meta-box" open><summary data-track="course_info_toggle">課程資訊</summary>
           <ul class="news-meta">
             {% if n.event_date and n.event_date != '' %}<li class="m-date"><b>日期</b>{{ n.event_date | date: "%Y/%m/%d" }}{% if n.event_end and n.event_end != "" and n.event_end != n.event_date %} – {{ n.event_end | date: "%Y/%m/%d" }}{% endif %}{% if n.event_time and n.event_time != '' %}　{{ n.event_time }}{% endif %}</li>{% endif %}
             {% if n.location and n.location != '' %}<li class="m-place"><b>地點</b>{{ n.location }}</li>{% endif %}
             {% if n.fee and n.fee != '' %}<li class="m-fee"><b>費用</b>{{ n.fee }}</li>{% endif %}
               {% if n.signup_end and n.signup_end != '' %}<li class="m-signup"><b>報名</b>{% if n.signup_start and n.signup_start != '' %}{{ n.signup_start | date: "%Y/%m/%d" }} – {% else %}即日起至 {% endif %}{{ n.signup_end | date: "%Y/%m/%d" }}</li>{% elsif n.signup_start and n.signup_start != '' %}<li class="m-signup"><b>報名</b>{{ n.signup_start | date: "%Y/%m/%d" }} 起</li>{% endif %}
               {% if n.course_code and n.course_code != '' %}<li class="m-code"><b>課程代碼</b>{{ n.course_code }}</li>{% endif %}
-          </ul>
+          </ul></details>
           <div class="content">{{ n.content }}</div>
           {% if ext != '' %}{% capture btn_label %}{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}報名/簡章下載{% endif %}{% endcapture %}<p class="ext-note">{% if n.signup_url and n.signup_url != '' %}本課程需至主辦單位網站報名，請點擊「{{ btn_label }}」按鈕（另開新視窗）。{% else %}本課程需至勞動部在職訓練網站報名，請點擊「{{ btn_label }}」按鈕。{% endif %}</p>{% endif %}
           <div class="actions">{% if ext != '' %}<a class="btn btn-primary js-signup" href="{{ ext }}" target="_blank" rel="noopener" data-track="external_signup" data-course="{{ n.title | escape }}">{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}報名/簡章下載{% endif %} ↗</a>{% elsif n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}" data-track="signup_course" data-course="{{ n.title | escape }}">報名這堂課</a>{% endif %}</div>
@@ -971,5 +981,9 @@ layout: null
   });
 </script>
 {% include news-extras.html %}
+<script>
+  // 手機版：課程資訊預設收合，點「課程資訊」展開
+  if (window.matchMedia('(max-width:640px)').matches) document.querySelectorAll('details.meta-box').forEach(function(d){ d.removeAttribute('open'); });
+</script>
 </body>
 </html>
