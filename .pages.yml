@@ -13,7 +13,8 @@ content:
     filename: "{year}-{month}-{day}-{primary}.md"
     format: yaml-frontmatter
     view:
-      fields: [title, category, date, published]
+      fields: [title, author, category, date, draft]
+      search: [title, author]
       primary: title
       sort: [date, title]
       default:
@@ -75,10 +76,25 @@ content:
       - name: signup_label
         label: 外部報名按鈕文字（留空＝「前往職訓局報名」）
         type: string
-      - name: published
-        label: 顯示在網站上（取消打勾＝先存草稿）
+      - name: signup_start
+        label: 報名開始日（留空＝現在就開放）
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: signup_end
+        label: 報名截止日（過了這天按鈕會變「報名已截止」）
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: author
+        label: 發文老師
+        type: string
+      - name: draft
+        label: 存成草稿（打勾＝只在預覽頁 ntcraft.org/preview.html 看得到，正式網站不顯示）
         type: boolean
-        default: true
+        default: false
       - name: body
         label: 詳細內容
         type: rich-text
