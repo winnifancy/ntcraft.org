@@ -24,6 +24,25 @@ for path in sys.argv[1:]:
         else:
             im.save(path, 'PNG', optimize=True)
     after = os.path.getsize(path)
+    if ext == '.png' and after > MAX_BYTES:
+        # PNG 照片壓不小 → 轉成 WebP，並更新消息與網頁裡的圖片連結
+        new = os.path.splitext(path)[0] + '.webp'
+        with Image.open(path) as im2:
+            im2.save(new, 'WEBP', quality=82, method=6)
+        os.remove(path)
+        old_ref, new_ref = '/' + path.lstrip('./'), '/' + new.lstrip('./')
+        for root, _, files in os.walk('.'):
+            if root.startswith(('./.git', './assets', './_site')): continue
+            for fn in files:
+                if fn.endswith(('.md', '.html', '.yml')):
+                    fp = os.path.join(root, fn)
+                    t = open(fp, encoding='utf-8').read()
+                    if old_ref in t or old_ref.lstrip('/') in t:
+                        open(fp, 'w', encoding='utf-8').write(t.replace(old_ref, new_ref).replace(old_ref.lstrip('/'), new_ref.lstrip('/')))
+                        print(f'  updated link in {fp}')
+        print(f'{path}: {before//1024} KB -> {new} {os.path.getsize(new)//1024} KB')
+        path = new
+    else:
+        print(f'{path}: {before//1024} KB -> {after//1024} KB')
     changed.append(path)
-    print(f'{path}: {before//1024} KB -> {after//1024} KB')
 print(f'compressed {len(changed)} file(s)')

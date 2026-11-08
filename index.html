@@ -753,6 +753,13 @@ layout: null
   .btn-disabled:hover{transform:none;}
   .news-tag.draft{background:#262420;color:#fff;}
   .news-tag + .news-tag{margin-left:6px;}
+  /* 首頁卡片：只顯示完整海報＋按鈕 */
+  .latest-news .news-card img{aspect-ratio:auto;height:auto;object-fit:contain;background:#fff;}
+  .latest-news .news-card .body{padding:16px 18px 20px;gap:0;}
+  .latest-news .news-card .actions{padding-top:0;}
+  .poster-link{display:block;}
+  .latest-news .news-card h3{margin-bottom:12px;font-size:17px;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
   .news-card .actions{margin-top:auto;padding-top:8px;display:flex;gap:10px;flex-wrap:wrap;}
   .news-card .btn{padding:10px 20px;font-size:14px;}
   .btn-line{border-color:var(--line);color:var(--ink);background:#fff;}
@@ -852,19 +859,9 @@ layout: null
       <div class="news-list">
         {% for n in items limit:3 %}{% assign ext = '' %}{% if n.signup_url and n.signup_url != '' %}{% assign ext = n.signup_url %}{% elsif n.course_code and n.course_code != '' %}{% capture ext %}https://ojt.wda.gov.tw/ClassSearch/Detail?OCID={{ n.course_code | strip }}&plantype=1{% endcapture %}{% endif %}{% assign is_course = false %}{% if n.category == "課程" %}{% assign is_course = true %}{% endif %}
         <article class="news-card reveal" data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}" data-signup-start="{{ n.signup_start | date: '%Y-%m-%d' }}" data-signup-end="{{ n.signup_end | date: '%Y-%m-%d' }}">
-          {% if n.poster and n.poster != '' %}<img src="{{ n.poster | relative_url }}" alt="{{ n.title | escape }}" loading="lazy">{% endif %}
+          {% if n.poster and n.poster != '' %}<a href="news.html#{{ n.id | split: '/' | last }}" class="poster-link" data-track="news_poster" data-course="{{ n.title | escape }}"><img src="{{ n.poster | relative_url }}" alt="{{ n.title | escape }}" loading="lazy"></a>{% endif %}
           <div class="body">
-            <span class="news-tag{% if is_course %} course{% endif %}">{{ n.category | default: "消息" }}</span>
-            <h3>{{ n.title }}</h3>
-            <ul class="news-meta">
-              {% if n.event_date and n.event_date != '' %}<li><b>日期</b>{{ n.event_date | date: "%Y/%m/%d" }}{% if n.event_end and n.event_end != "" and n.event_end != n.event_date %} – {{ n.event_end | date: "%m/%d" }}{% endif %}{% if n.event_time and n.event_time != '' %}　{{ n.event_time }}{% endif %}</li>{% endif %}
-              {% if n.location and n.location != '' %}<li><b>地點</b>{{ n.location }}</li>{% endif %}
-              {% if n.fee and n.fee != '' %}<li><b>費用</b>{{ n.fee }}</li>{% endif %}
-              {% if n.signup_end and n.signup_end != '' %}<li><b>報名</b>{% if n.signup_start and n.signup_start != '' %}{{ n.signup_start | date: "%Y/%m/%d" }} – {% else %}即日起至 {% endif %}{{ n.signup_end | date: "%Y/%m/%d" }}</li>{% elsif n.signup_start and n.signup_start != '' %}<li><b>報名</b>{{ n.signup_start | date: "%Y/%m/%d" }} 起</li>{% endif %}
-              {% if n.course_code and n.course_code != '' %}<li><b>課程代碼</b>{{ n.course_code }}</li>{% endif %}
-            </ul>
-            {% if n.summary and n.summary != '' %}<p class="summary">{{ n.summary }}</p>{% endif %}
-            {% if ext != '' %}<p class="ext-note">本課程需至主辦單位官方網站報名，點按鈕會另開新視窗。</p>{% endif %}
+            <h3{% if n.poster and n.poster != '' %} class="sr-only"{% endif %}>{{ n.title }}</h3>
             <div class="actions">
               {% if ext != '' %}<a class="btn btn-primary js-signup" href="{{ ext }}" target="_blank" rel="noopener" data-track="external_signup" data-course="{{ n.title | escape }}">{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}前往職訓局報名{% endif %} ↗</a>{% elsif n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}" data-track="signup_course" data-course="{{ n.title | escape }}">報名這堂課</a>{% endif %}
               <a class="btn btn-line" href="news.html#{{ n.id | split: '/' | last }}" data-track="news_detail" data-course="{{ n.title | escape }}">看詳細</a>

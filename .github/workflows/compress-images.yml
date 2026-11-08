@@ -40,10 +40,11 @@ jobs:
       - name: 存回 GitHub
         id: commit
         run: |
-          if git diff --quiet; then echo "沒有需要壓縮的圖片"; echo "pushed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          git add -A assets/images _news *.html
+          if git diff --cached --quiet; then echo "沒有需要壓縮的圖片"; echo "pushed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "自動壓縮圖片"
+          git commit -m "自動壓縮圖片"
           git pull --rebase origin main
           git push origin HEAD:main
           echo "pushed=true" >> "$GITHUB_OUTPUT"

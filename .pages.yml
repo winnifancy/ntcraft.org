@@ -19,7 +19,7 @@ content:
     label: 最新消息／課程
     type: collection
     path: _news
-    filename: "{year}-{month}-{day}-{primary}.md"
+    filename: "{year}-{month}-{day}-{hour}{minute}{second}.md"
     format: yaml-frontmatter
     view:
       fields: [title, author, category, date, draft]
