@@ -1,0 +1,5 @@
+{%- comment -%}「最新課程」按鈕：連到最新一則可報名的消息（勾選報名、或有課程代碼／報名網址），沒有就連到最新消息列表{%- endcomment -%}
+{%- assign lc_url = '/news.html' -%}
+{%- assign lc_items = site.news | where_exp: "n", "n.draft != true" | sort: "date" | reverse -%}
+{%- for n in lc_items -%}{%- if n.signup == true or n.course_code and n.course_code != '' or n.signup_url and n.signup_url != '' -%}{%- assign lc_url = n.url -%}{%- break -%}{%- endif -%}{%- endfor -%}
+{{- lc_url -}}
