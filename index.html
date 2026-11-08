@@ -846,7 +846,7 @@ layout: null
       {% assign items = site.news | sort: "date" | reverse %}
       {% if items.size == 0 %}<p class="news-empty">新的課程即將公布，也歡迎先<a href="signup.html">填寫報名表</a>告訴我們你想上的課程。</p>{% endif %}
       <div class="news-list">
-        {% for n in items limit:3 %}{% assign is_course = false %}{% if n.category == "課程" %}{% assign is_course = true %}{% endif %}
+        {% for n in items limit:3 %}{% assign ext = '' %}{% if n.signup_url and n.signup_url != '' %}{% assign ext = n.signup_url %}{% elsif n.course_code and n.course_code != '' %}{% capture ext %}https://ojt.wda.gov.tw/ClassSearch/Detail?OCID={{ n.course_code | strip }}&plantype=1{% endcapture %}{% endif %}{% assign is_course = false %}{% if n.category == "課程" %}{% assign is_course = true %}{% endif %}
         <article class="news-card reveal" data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}">
           {% if n.poster and n.poster != '' %}<img src="{{ n.poster | relative_url }}" alt="{{ n.title | escape }}" loading="lazy">{% endif %}
           <div class="body">
@@ -856,11 +856,12 @@ layout: null
               {% if n.event_date and n.event_date != '' %}<li><b>日期</b>{{ n.event_date | date: "%Y/%m/%d" }}{% if n.event_end and n.event_end != "" and n.event_end != n.event_date %} – {{ n.event_end | date: "%m/%d" }}{% endif %}{% if n.event_time and n.event_time != '' %}　{{ n.event_time }}{% endif %}</li>{% endif %}
               {% if n.location and n.location != '' %}<li><b>地點</b>{{ n.location }}</li>{% endif %}
               {% if n.fee and n.fee != '' %}<li><b>費用</b>{{ n.fee }}</li>{% endif %}
+              {% if n.course_code and n.course_code != '' %}<li><b>課程代碼</b>{{ n.course_code }}</li>{% endif %}
             </ul>
             {% if n.summary and n.summary != '' %}<p class="summary">{{ n.summary }}</p>{% endif %}
-            {% if n.signup_url and n.signup_url != '' %}<p class="ext-note">本課程需至主辦單位官方網站報名，點按鈕會另開新視窗。</p>{% endif %}
+            {% if ext != '' %}<p class="ext-note">本課程需至主辦單位官方網站報名，點按鈕會另開新視窗。</p>{% endif %}
             <div class="actions">
-              {% if n.signup_url and n.signup_url != '' %}<a class="btn btn-primary js-signup" href="{{ n.signup_url }}" target="_blank" rel="noopener" data-track="external_signup" data-course="{{ n.title | escape }}">{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}前往職訓局報名{% endif %} ↗</a>{% elsif n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}" data-track="signup_course" data-course="{{ n.title | escape }}">報名這堂課</a>{% endif %}
+              {% if ext != '' %}<a class="btn btn-primary js-signup" href="{{ ext }}" target="_blank" rel="noopener" data-track="external_signup" data-course="{{ n.title | escape }}">{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}前往職訓局報名{% endif %} ↗</a>{% elsif n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}" data-track="signup_course" data-course="{{ n.title | escape }}">報名這堂課</a>{% endif %}
               <a class="btn btn-line" href="news.html#{{ n.id | split: '/' | last }}" data-track="news_detail" data-course="{{ n.title | escape }}">看詳細</a>
             </div>
           </div>

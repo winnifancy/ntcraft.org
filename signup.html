@@ -822,7 +822,7 @@ layout: null
           <select id="f-course" name="course" required>
             <option value="">請選擇</option>
             {% assign open = site.news | where: "signup", true | sort: "date" | reverse %}
-            {% if open.size > 0 %}<optgroup label="近期開課">{% for n in open %}{% if n.signup_url and n.signup_url != '' %}{% continue %}{% endif %}
+            {% if open.size > 0 %}<optgroup label="近期開課">{% for n in open %}{% if n.signup_url and n.signup_url != '' %}{% continue %}{% endif %}{% if n.course_code and n.course_code != '' %}{% continue %}{% endif %}
               <option data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}">{{ n.title }}</option>{% endfor %}
             </optgroup>{% endif %}
             <optgroup label="其他想上的課程">

@@ -66,8 +66,11 @@ content:
         label: 開放報名（打勾會出現報名按鈕；有填外部報名網址就連到外部）
         type: boolean
         default: true
+      - name: course_code
+        label: 職訓局課程代碼（例如 174414；填了會自動連到職訓局報名頁）
+        type: string
       - name: signup_url
-        label: 外部報名網址（職訓局等課程才填；填了會改成連到這個網址報名，不使用本站報名表）
+        label: 外部報名網址（非職訓局的外部報名才需要填；有填會優先使用）
         type: string
       - name: signup_label
         label: 外部報名按鈕文字（留空＝「前往職訓局報名」）
