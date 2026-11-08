@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
@@ -748,6 +751,24 @@
   .signup-status.ok{background:var(--green-tint);color:var(--green);}
   .signup-status.err{background:var(--clay-tint);color:var(--clay);}
   .signup-form .btn[disabled]{opacity:.6;cursor:wait;}
+
+  /* ---------- 報名按鈕 / 最新消息 ---------- */
+  .nav-cta{
+    flex:none;margin-left:10px;display:inline-flex;align-items:center;gap:6px;
+    padding:10px 20px;border-radius:99px;background:var(--clay);color:#fff !important;
+    font-size:14.5px;font-weight:700;text-decoration:none;white-space:nowrap;
+    box-shadow:0 8px 20px -10px rgba(178,59,34,.7);
+    transition:background .25s var(--ease), transform .25s var(--ease);
+  }
+  .nav-cta:hover{background:#94301b;transform:translateY(-1px);}
+  @media (max-width:1180px){ .nav-links{gap:2px;} .nav-links a{padding:10px 9px;font-size:14px;} .nav-links a::after{left:9px;right:9px;} }
+  @media (max-width:1000px){ .brand-text small{display:none;} .brand-text{font-size:15px;} }
+  @media (max-width:900px) and (min-width:721px){ .brand-text{display:none;} }
+  @media (max-width:720px){
+    .nav-cta{order:2;margin-left:auto;margin-right:10px;padding:8px 14px;font-size:14px;}
+    .nav-toggle{order:3;}
+  }
+  @media (max-width:400px){ .brand-text{font-size:13px;} .nav-cta{padding:8px 11px;margin-right:6px;} .brand{gap:8px;} }
 </style>
 </head>
 <body class="page-contact">
@@ -760,11 +781,13 @@
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="開啟選單" aria-expanded="false"><span></span></button>
       <nav class="nav-links" id="navLinks" aria-label="主要導覽"><a href="index.html">關於本協會</a>
+        <a href="news.html">最新消息</a>
         <a href="mission.html">宗旨與任務</a>
         <a href="programs.html">推廣項目</a>
         <a href="impact.html">成果與公益</a>
         <a href="social.html">官方社群</a>
         <a href="contact.html">聯絡我們</a></nav>
+      <a href="signup.html" class="nav-cta">我要報名</a>
     </div>
   </header>
   <div class="official-domain"><div class="container">本網站（ntcraft.org）為社團法人南投縣手工藝發展協會官方網站</div></div>
@@ -786,6 +809,11 @@
           <label for="f-course">想參加的課程／活動<span class="req">*</span></label>
           <select id="f-course" name="course" required>
             <option value="">請選擇</option>
+            {% assign open = site.news | where: "signup", true | sort: "date" | reverse %}
+            {% if open.size > 0 %}<optgroup label="近期開課">{% for n in open %}
+              <option data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}">{{ n.title }}</option>{% endfor %}
+            </optgroup>{% endif %}
+            <optgroup label="其他想上的課程">
             <option>毛線編織</option>
             <option>禪繞畫</option>
             <option>染布</option>
@@ -794,6 +822,7 @@
             <option>樂齡手工藝</option>
             <option>親子手作工作坊</option>
             <option>其他（請在備註說明）</option>
+            </optgroup>
           </select>
         </div>
         <div class="field">
@@ -884,6 +913,20 @@
       submitBtn.disabled = false; submitBtn.textContent = '送出報名';
     }
   });
+
+  // 移除已結束的課程選項，並依網址 ?course= 自動選好課程
+  (function(){
+    const sel = document.getElementById('f-course');
+    const today = new Date(); today.setHours(0,0,0,0);
+    sel.querySelectorAll('option[data-end]').forEach(o => { const d=o.dataset.end; if (d && new Date(d+'T23:59:59') < today) o.remove(); });
+    sel.querySelectorAll('optgroup').forEach(g => { if (!g.children.length) g.remove(); });
+    const want = new URLSearchParams(location.search).get('course');
+    if (want) {
+      let opt = [...sel.options].find(o => o.value === want);
+      if (!opt) { opt = new Option(want, want); sel.insertBefore(opt, sel.options[1]); }
+      sel.value = want;
+    }
+  })();
 </script>
 </body>
 </html>

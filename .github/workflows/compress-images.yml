@@ -1,0 +1,56 @@
+# 有人上傳圖片到 assets/images 後，自動壓縮過大的圖片並存回
+name: 自動壓縮圖片
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/images/**'
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  compress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 安裝 Pillow
+        run: pip install Pillow==11.0.0
+
+      - name: 找出這次新增或修改的圖片並壓縮
+        run: |
+          BEFORE="${{ github.event.before }}"
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BEFORE" 2>/dev/null; then
+            git ls-files -z 'assets/images/' > files.txt
+          else
+            git diff -z --name-only --diff-filter=AM "$BEFORE" "${{ github.sha }}" -- 'assets/images/' > files.txt
+          fi
+          xargs -0 -r python .github/scripts/compress_images.py < files.txt
+          rm files.txt
+
+      - name: 存回 GitHub
+        id: commit
+        run: |
+          if git diff --quiet; then echo "沒有需要壓縮的圖片"; echo "pushed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "自動壓縮圖片"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: 重新產生網站
+        if: steps.commit.outputs.pushed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
