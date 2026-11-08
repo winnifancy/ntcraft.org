@@ -804,6 +804,13 @@ layout: null
   @media (max-width:400px){ .nav-fb{width:34px;height:34px;} .nav-cta{margin-left:6px;} }
   .news-title-link{color:inherit;text-decoration:none;}
   .news-title-link:hover{text-decoration:underline;text-underline-offset:4px;}
+    .news-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;}
+  .news-top .news-tag{font-size:14px;}
+  .news-date{font-size:14px;color:var(--ink-soft);}
+  .news-detail .news-meta{font-size:17px;gap:8px;line-height:1.7;margin-top:14px;}
+  .news-detail .news-meta li{display:grid;grid-template-columns:5em 1fr;gap:8px;}
+  .news-detail .news-meta b{margin:0;}
+  .news-detail .ext-note{font-size:15px;color:var(--ink);background:var(--yellow-tint);padding:10px 14px;border-radius:8px;}
   </style>
 </head>
 <body class="page-contact">
@@ -844,7 +851,8 @@ layout: null
       <article class="news-detail{% unless n.poster and n.poster != "" %} no-img{% endunless %}" id="{{ n.id | split: '/' | last }}" data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}" data-signup-start="{{ n.signup_start | date: '%Y-%m-%d' }}" data-signup-end="{{ n.signup_end | date: '%Y-%m-%d' }}">
         {% if n.poster and n.poster != '' %}<img src="{{ n.poster | relative_url }}" alt="{{ n.title | escape }}" loading="lazy">{% endif %}
         <div>
-          <span class="news-tag{% if n.category == '課程' %} course{% endif %}">{{ n.category | default: "消息" }}</span>{% if n.draft == true %}<span class="news-tag draft">草稿・未公開</span>{% endif %}{% if n.author and n.author != "" %}<span class="news-tag">{{ n.author }}</span>{% endif %}
+          <div class="news-top"><span class="news-tag{% if n.category == '課程' %} course{% endif %}">{{ n.category | default: "消息" }}</span>{% if n.draft == true %}<span class="news-tag draft">草稿・未公開</span>{% endif %}{% if n.author and n.author != "" %}<span class="news-tag">{{ n.author }}</span>{% endif %}
+          <span class="news-date">發布 {{ n.date | date: "%Y/%m/%d" }}</span></div>
           <h2>{{ n.title }}</h2>
           <ul class="news-meta">
             {% if n.event_date and n.event_date != '' %}<li><b>日期</b>{{ n.event_date | date: "%Y/%m/%d" }}{% if n.event_end and n.event_end != "" and n.event_end != n.event_date %} – {{ n.event_end | date: "%Y/%m/%d" }}{% endif %}{% if n.event_time and n.event_time != '' %}　{{ n.event_time }}{% endif %}</li>{% endif %}
@@ -852,10 +860,9 @@ layout: null
             {% if n.fee and n.fee != '' %}<li><b>費用</b>{{ n.fee }}</li>{% endif %}
               {% if n.signup_end and n.signup_end != '' %}<li><b>報名</b>{% if n.signup_start and n.signup_start != '' %}{{ n.signup_start | date: "%Y/%m/%d" }} – {% else %}即日起至 {% endif %}{{ n.signup_end | date: "%Y/%m/%d" }}</li>{% elsif n.signup_start and n.signup_start != '' %}<li><b>報名</b>{{ n.signup_start | date: "%Y/%m/%d" }} 起</li>{% endif %}
               {% if n.course_code and n.course_code != '' %}<li><b>課程代碼</b>{{ n.course_code }}</li>{% endif %}
-            <li><b>發布</b>{{ n.date | date: "%Y/%m/%d" }}</li>
           </ul>
           <div class="content">{{ n.content }}</div>
-          {% if ext != '' %}<p class="ext-note">本課程需至主辦單位官方網站報名，點按鈕會另開新視窗。</p>{% endif %}
+          {% if ext != '' %}{% capture btn_label %}{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}報名/簡章下載{% endif %}{% endcapture %}<p class="ext-note">{% if n.signup_url and n.signup_url != '' %}本課程需至主辦單位網站報名，請點擊「{{ btn_label }}」按鈕（另開新視窗）。{% else %}本課程需至勞動部在職訓練網站報名，請點擊「{{ btn_label }}」按鈕。{% endif %}</p>{% endif %}
           <div class="actions">{% if ext != '' %}<a class="btn btn-primary js-signup" href="{{ ext }}" target="_blank" rel="noopener" data-track="external_signup" data-course="{{ n.title | escape }}">{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}報名/簡章下載{% endif %} ↗</a>{% elsif n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}" data-track="signup_course" data-course="{{ n.title | escape }}">報名這堂課</a>{% endif %}</div>
         </div>
       </article>
