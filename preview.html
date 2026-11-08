@@ -802,7 +802,9 @@ layout: null
   .contact-social{margin-top:40px;}
   @media (max-width:720px){ .nav-fb{order:2;margin-left:auto;width:36px;height:36px;} .nav-fb svg{width:20px;height:20px;} .nav-cta{margin-left:8px;} }
   @media (max-width:400px){ .nav-fb{width:34px;height:34px;} .nav-cta{margin-left:6px;} }
-</style>
+  .news-title-link{color:inherit;text-decoration:none;}
+  .news-title-link:hover{text-decoration:underline;text-underline-offset:4px;}
+  </style>
 </head>
 <body class="page-contact">
   <a class="skip-link" href="#main">跳至主要內容</a>
@@ -951,5 +953,6 @@ layout: null
     });
   });
 </script>
+{% include news-extras.html %}
 </body>
 </html>

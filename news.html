@@ -801,7 +801,9 @@ layout: null
   .contact-social{margin-top:40px;}
   @media (max-width:720px){ .nav-fb{order:2;margin-left:auto;width:36px;height:36px;} .nav-fb svg{width:20px;height:20px;} .nav-cta{margin-left:8px;} }
   @media (max-width:400px){ .nav-fb{width:34px;height:34px;} .nav-cta{margin-left:6px;} }
-</style>
+  .news-title-link{color:inherit;text-decoration:none;}
+  .news-title-link:hover{text-decoration:underline;text-underline-offset:4px;}
+  </style>
 </head>
 <body class="page-contact">
   <a class="skip-link" href="#main">跳至主要內容</a>
@@ -842,7 +844,7 @@ layout: null
         {% if n.poster and n.poster != '' %}<img src="{{ n.poster | relative_url }}" alt="{{ n.title | escape }}" loading="lazy">{% endif %}
         <div>
           <span class="news-tag{% if n.category == '課程' %} course{% endif %}">{{ n.category | default: "消息" }}</span>
-          <h2>{{ n.title }}</h2>
+          <h2><a class="news-title-link" href="{{ n.url }}" data-track="news_title" data-course="{{ n.title | escape }}">{{ n.title }}</a></h2>
           <ul class="news-meta">
             {% if n.event_date and n.event_date != '' %}<li><b>日期</b>{{ n.event_date | date: "%Y/%m/%d" }}{% if n.event_end and n.event_end != "" and n.event_end != n.event_date %} – {{ n.event_end | date: "%Y/%m/%d" }}{% endif %}{% if n.event_time and n.event_time != '' %}　{{ n.event_time }}{% endif %}</li>{% endif %}
             {% if n.location and n.location != '' %}<li><b>地點</b>{{ n.location }}</li>{% endif %}
@@ -854,6 +856,7 @@ layout: null
           <div class="content">{{ n.content }}</div>
           {% if ext != '' %}<p class="ext-note">本課程需至主辦單位官方網站報名，點按鈕會另開新視窗。</p>{% endif %}
           <div class="actions">{% if ext != '' %}<a class="btn btn-primary js-signup" href="{{ ext }}" target="_blank" rel="noopener" data-track="external_signup" data-course="{{ n.title | escape }}">{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}報名/簡章下載{% endif %} ↗</a>{% elsif n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}" data-track="signup_course" data-course="{{ n.title | escape }}">報名這堂課</a>{% endif %}</div>
+          {% include share.html url=n.url title=n.title %}
         </div>
       </article>
       {% endfor %}
@@ -950,5 +953,6 @@ layout: null
     });
   });
 </script>
+{% include news-extras.html %}
 </body>
 </html>

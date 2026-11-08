@@ -1,7 +1,14 @@
 # Jekyll 設定（GitHub Pages 會自動用它產生網站）
 title: 社團法人南投縣手工藝發展協會
 timezone: Asia/Taipei
+url: https://ntcraft.org
 collections:
   news:
-    output: false
+    output: true          # 每則消息都有自己的網頁（可分享、GA 可分別統計瀏覽數）
+    permalink: /news/:name/
+defaults:
+  - scope:
+      type: news
+    values:
+      layout: news-post
 exclude: [README.md, Gemfile, Gemfile.lock, node_modules, vendor]
