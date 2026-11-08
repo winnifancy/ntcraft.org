@@ -1,0 +1,7 @@
+{% assign share_url = include.url | prepend: site.url %}<div class="share-row" data-share-url="{{ share_url }}" data-share-title="{{ include.title | escape }}">
+  <span class="share-label">分享</span>
+  <a class="share-btn share-fb" href="https://www.facebook.com/sharer/sharer.php?u={{ share_url | url_encode }}" target="_blank" rel="noopener" data-track="share_facebook" data-course="{{ include.title | escape }}" aria-label="分享到 Facebook">Facebook</a>
+  <a class="share-btn share-line" href="https://social-plugins.line.me/lineit/share?url={{ share_url | url_encode }}" target="_blank" rel="noopener" data-track="share_line" data-course="{{ include.title | escape }}" aria-label="分享到 LINE">LINE</a>
+  <button type="button" class="share-btn share-copy" data-track="share_copy" data-course="{{ include.title | escape }}">複製連結</button>
+  <button type="button" class="share-btn share-native" data-track="share_more" data-course="{{ include.title | escape }}" hidden>更多…</button>
+</div>

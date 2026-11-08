@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-5JMFDM32"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+  <meta charset="UTF-8">
+{% assign desc = page.summary | default: page.content | strip_html | strip_newlines | truncate: 120 %}{% assign img = page.poster | default: '/assets/images/logo.png' %}{% if page.draft == true %}  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="refresh" content="0; url=/news.html">
+{% endif %}  <title>{{ page.title }}｜南投縣手工藝發展協會</title>
+  <meta name="description" content="{{ desc | strip_newlines | escape }}">
+  <link rel="canonical" href="{{ page.url | prepend: site.url }}">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="社團法人南投縣手工藝發展協會">
+  <meta property="og:title" content="{{ page.title | escape }}">
+  <meta property="og:description" content="{{ desc | strip_newlines | escape }}">
+  <meta property="og:url" content="{{ page.url | prepend: site.url }}">
+  <meta property="og:image" content="{{ img | prepend: site.url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/assets/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+  :root{
+    --ink:#262420;
+    --ink-soft:#615c52;
+    --paper:#FBF8F2;
+    --paper-soft:#FFFFFF;
+    --yellow:#EFAF12;
+    --yellow-tint:#FCF1D9;
+    --green:#4C7A3D;
+    --green-tint:#EBF2E6;
+    --clay:#B23B22;
+    --clay-tint:#F7E9E2;
+    --line: rgba(38,36,32,0.12);
+    --shadow: 0 18px 44px -26px rgba(38,36,32,0.28);
+    --radius: 6px;
+    --maxw: 1180px;
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper-soft);
+    color:var(--ink);
+    font-family:'Noto Sans TC', sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Noto Serif TC', serif;
+    margin:0;
+    color:var(--ink);
+    letter-spacing:.02em;
+  }
+
+  p{margin:0;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font-family:inherit;}
+
+  .container{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- 編織紋理素材（淡化） ---------- */
+  .weave-paper{
+    background-image:
+      repeating-linear-gradient(45deg, rgba(239,175,18,0.10) 0px, rgba(239,175,18,0.10) 2px, transparent 2px, transparent 22px),
+      repeating-linear-gradient(-45deg, rgba(76,122,61,0.08) 0px, rgba(76,122,61,0.08) 2px, transparent 2px, transparent 22px);
+  }
+
+  /* ---------- Header / Nav ---------- */
+  .site-header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:76px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+  }
+  .brand-mark{
+    width:42px;height:42px;flex:none;
+    border-radius:50%;
+    object-fit:cover;
+    box-shadow:0 0 0 1px var(--line);
+  }
+  .brand-text{
+    font-family:'Noto Serif TC', serif;
+    font-weight:700;
+    font-size:17px;
+    line-height:1.3;
+    color:var(--ink);
+  }
+  .brand-text small{
+    display:block;
+    font-family:'JetBrains Mono', monospace;
+    font-weight:400;
+    font-size:10px;
+    letter-spacing:.12em;
+    color:var(--green);
+    margin-top:2px;
+  }
+
+  .nav-links{
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .nav-links a{
+    text-decoration:none;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--ink-soft);
+    padding:10px 14px;
+    border-radius:var(--radius);
+    position:relative;
+    transition:color .25s var(--ease);
+  }
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:14px;right:14px;
+    bottom:6px;
+    height:2px;
+    background:var(--clay);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .3s var(--ease);
+  }
+  .nav-links a:hover{color:var(--clay);}
+  .nav-links a:hover::after,
+  .nav-links a.active::after{transform:scaleX(1);}
+  .nav-links a.active{color:var(--clay);}
+
+  .nav-toggle{
+    display:none;
+    width:42px;height:42px;
+    border:1px solid var(--line);
+    background:transparent;
+    border-radius:var(--radius);
+    cursor:pointer;
+    position:relative;
+  }
+  .nav-toggle span,
+  .nav-toggle span::before,
+  .nav-toggle span::after{
+    content:"";
+    position:absolute;
+    left:11px;right:11px;
+    height:2px;
+    background:var(--ink);
+    transition:transform .25s var(--ease), opacity .25s var(--ease);
+  }
+  .nav-toggle span{top:20px;}
+  .nav-toggle span::before{top:-7px;}
+  .nav-toggle span::after{top:7px;}
+  .nav-toggle.open span{background:transparent;}
+  .nav-toggle.open span::before{transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span::after{transform:translateY(-7px) rotate(-45deg);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    color:var(--paper-soft);
+    overflow:hidden;
+    padding:100px 0 116px;
+    background:#2a2620 url('assets/images/banner.jpg') center 26% / cover no-repeat;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:
+      linear-gradient(102deg, rgba(20,17,13,0.90) 0%, rgba(20,17,13,0.72) 34%, rgba(20,17,13,0.38) 58%, rgba(20,17,13,0.12) 76%),
+      linear-gradient(0deg, rgba(20,17,13,0.35) 0%, rgba(20,17,13,0) 30%);
+  }
+  .hero-flex{
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    gap:64px;
+  }
+  .hero-inner{
+    max-width:620px;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.22em;
+    color:var(--yellow);
+    margin-bottom:26px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:28px;height:1px;
+    background:var(--yellow);
+  }
+  .hero h1{
+    font-size:clamp(32px, 5vw, 54px);
+    font-weight:900;
+    line-height:1.32;
+    color:#ffffff;
+    text-shadow:0 2px 18px rgba(0,0,0,0.35);
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--yellow);
+  }
+  .hero h1 em.alt{ color:#ff9d78; }
+  .hero p.lead{
+    margin-top:26px;
+    font-size:16.5px;
+    line-height:2;
+    color:rgba(255,255,255,0.88);
+    max-width:520px;
+    text-shadow:0 1px 12px rgba(0,0,0,0.3);
+  }
+  .hero-cta{
+    margin-top:38px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 26px;
+    border-radius:99px;
+    font-size:14.5px;
+    font-weight:700;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .25s var(--ease), background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{
+    background:var(--clay);
+    color:#fff;
+  }
+  .btn-primary:hover{background:#94301b;}
+  .btn-ghost{
+    border-color:rgba(255,255,255,0.55);
+    color:#fff;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(2px);
+  }
+  .btn-ghost:hover{border-color:var(--yellow); color:var(--yellow); background:rgba(255,255,255,0.14);}
+
+  .hero-visual{
+    flex:none;
+    position:relative;
+    width:280px;
+    height:280px;
+  }
+  .hero-visual::before{
+    content:"";
+    position:absolute;
+    inset:-18px;
+    border:1.5px dashed rgba(255,255,255,0.55);
+    border-radius:50%;
+  }
+  .hero-visual img{
+    width:100%;height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    box-shadow:0 0 0 7px rgba(255,255,255,0.92), var(--shadow);
+    background:#fff;
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  section{padding:96px 0;}
+  .section-head{
+    max-width:640px;
+    margin-bottom:56px;
+  }
+  .section-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:17px;
+    font-weight:700;
+    letter-spacing:.16em;
+    color:var(--clay);
+    display:block;
+    margin-bottom:16px;
+  }
+  .section-head h2{
+    font-size:clamp(26px, 3.4vw, 36px);
+    font-weight:700;
+  }
+  .section-head p{
+    margin-top:16px;
+    color:var(--ink-soft);
+    font-size:15.5px;
+  }
+  .reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity .7s var(--ease), transform .7s var(--ease);
+  }
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ---------- About ---------- */
+  .about{background:var(--paper-soft);}
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:54px;
+    align-items:start;
+  }
+  .about-text p{
+    color:var(--ink-soft);
+    font-size:15.5px;
+  }
+  .about-text p + p{margin-top:18px;}
+  .info-card{
+    background:var(--paper);
+    color:var(--ink);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:34px 30px;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+  .info-card h3{
+    font-size:16px;
+    color:var(--clay);
+    font-weight:700;
+    letter-spacing:.06em;
+    margin-bottom:22px;
+    position:relative;
+    z-index:1;
+  }
+  .info-list{position:relative;z-index:1;}
+  .info-list li{
+    display:flex;
+    gap:16px;
+    padding:13px 0;
+    border-top:1px solid var(--line);
+    font-size:14px;
+  }
+  .info-list li:first-child{border-top:none;}
+  .info-list .k{
+    flex:none;
+    width:84px;
+    color:var(--ink-soft);
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.06em;
+    padding-top:2px;
+  }
+  .info-list .v{flex:1; line-height:1.6;}
+  .info-list .v a{text-decoration:none; border-bottom:1px dotted var(--ink-soft);}
+
+  .mission-head{
+    margin-top:64px;
+    text-align:center;
+  }
+  .mission-head h3{
+    font-size:clamp(22px,2.8vw,28px);
+    font-weight:700;
+    display:inline-block;
+    position:relative;
+    padding-bottom:14px;
+  }
+  .mission-head h3::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:56px;height:3px;
+    background:var(--yellow);
+    border-radius:99px;
+  }
+
+  .mission-grid{
+    margin-top:36px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .mission-card{
+    background:var(--paper-soft);
+    padding:32px 26px;
+    transition:background .3s var(--ease);
+  }
+  .mission-card:hover{background:var(--paper);}
+  .mission-card .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    color:var(--green);
+    display:block;
+    margin-bottom:14px;
+  }
+  .mission-card h4{
+    font-size:17px;
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  .mission-card p{
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Programs ---------- */
+  .programs{
+    background:var(--yellow-tint);
+    color:var(--ink);
+  }
+  .programs .section-head p{color:var(--ink-soft);}
+  .program-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+  }
+  .program-card{
+    background:var(--paper-soft);
+    border:1px solid var(--line);
+    border-top:3px solid var(--yellow);
+    border-radius:var(--radius);
+    padding:30px 26px 28px;
+    position:relative;
+    transition:border-color .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .program-card:nth-child(3n+2){border-top-color:var(--green);}
+  .program-card:nth-child(3n){border-top-color:var(--clay);}
+  .program-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
+  }
+  .program-no{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    letter-spacing:.1em;
+  }
+  .program-card h3{
+    margin-top:18px;
+    font-size:18px;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .program-card p{
+    margin-top:10px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Events ---------- */
+  .events{background:var(--paper-soft);}
+  .construction{
+    border:1.5px dashed rgba(178,59,34,0.4);
+    border-radius:var(--radius);
+    background:var(--clay-tint);
+    padding:64px 40px;
+    text-align:center;
+  }
+  .construction .icon{
+    width:54px;height:54px;
+    margin:0 auto 22px;
+    border-radius:50%;
+    background:var(--paper-soft);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--shadow);
+  }
+  .construction .icon svg{width:24px;height:24px;}
+  .construction h3{
+    font-size:22px;
+    font-weight:700;
+    color:var(--clay);
+  }
+  .construction p{
+    margin-top:12px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    max-width:440px;
+    margin-left:auto;margin-right:auto;
+  }
+  .construction a{
+    display:inline-block;
+    margin-top:24px;
+    color:var(--clay);
+    font-weight:700;
+    text-decoration:none;
+    border-bottom:1px solid var(--clay);
+    font-size:13.5px;
+  }
+
+  /* ---------- Social ---------- */
+  .social{
+    background:var(--green-tint);
+  }
+  .social-card{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    gap:30px;
+    background:var(--paper-soft);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:38px 40px;
+    box-shadow:var(--shadow);
+    text-decoration:none;
+  }
+  .social-icon{
+    width:58px;height:58px;
+    flex:none;
+    border-radius:50%;
+    background:#1877F2;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .social-icon svg{width:26px;height:26px;}
+  .social-copy h3{font-size:19px;font-weight:700;color:var(--ink);}
+  .social-copy p{margin-top:8px;font-size:14px;color:var(--ink-soft);}
+
+  /* ---------- Contact ---------- */
+  .contact{
+    background:var(--paper-soft);
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .contact-cell{
+    background:var(--paper-soft);
+    padding:32px 30px;
+  }
+  .contact-cell .k{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.16em;
+    color:var(--clay);
+    display:block;
+    margin-bottom:12px;
+  }
+  .contact-cell .v{
+    font-size:16px;
+    font-weight:500;
+    line-height:1.7;
+    color:var(--ink);
+  }
+  .copy-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .copy-btn{
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--ink-soft);
+    font-size:11.5px;
+    padding:7px 12px;
+    border-radius:99px;
+    cursor:pointer;
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:.04em;
+    transition:border-color .25s var(--ease), color .25s var(--ease);
+  }
+  .copy-btn:hover{border-color:var(--green); color:var(--green);}
+  .copy-btn.copied{color:var(--green); border-color:var(--green);}
+
+  .map-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:16px;
+    font-size:13px;
+    color:var(--green);
+    text-decoration:none;
+    border-bottom:1px dotted var(--green);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--paper);
+    color:var(--ink-soft);
+    border-top:1px solid var(--line);
+    padding:28px 0;
+  }
+  .footer-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    font-size:12.5px;
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  /* ---------- Focus ---------- */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--clay);
+    outline-offset:3px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 920px){
+    .about-grid{grid-template-columns:1fr;}
+    .mission-grid{grid-template-columns:repeat(2,1fr);}
+    .program-grid{grid-template-columns:repeat(2,1fr);}
+    .contact-grid{grid-template-columns:1fr;}
+    .hero-flex{flex-direction:column-reverse; text-align:center; gap:40px;}
+    .hero-inner{max-width:100%;}
+    .hero p.lead{margin-left:auto;margin-right:auto;}
+    .hero-cta{justify-content:center;}
+    .hero{background-position:center 20%;}
+    .hero::before{
+      background:
+        linear-gradient(200deg, rgba(20,17,13,0.88) 0%, rgba(20,17,13,0.6) 45%, rgba(20,17,13,0.42) 100%),
+        linear-gradient(0deg, rgba(20,17,13,0.4) 0%, rgba(20,17,13,0.05) 40%);
+    }
+  }
+
+  @media (max-width: 720px){
+    .container{padding:0 20px;}
+    .nav-links{
+      position:fixed;
+      top:76px;left:0;right:0;
+      flex-direction:column;
+      align-items:stretch;
+      background:var(--paper-soft);
+      border-bottom:1px solid var(--line);
+      padding:10px 20px 22px;
+      gap:2px;
+      transform:translateY(-12px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .25s var(--ease), transform .25s var(--ease);
+    }
+    .nav-links.open{
+      transform:translateY(0);
+      opacity:1;
+      pointer-events:auto;
+    }
+    .nav-links a{padding:14px 4px; border-bottom:1px solid var(--line);}
+    .nav-links a::after{display:none;}
+    .nav-toggle{display:block;}
+    .hero{padding:56px 0 64px; background-position:center 16%;}
+    .hero-visual{width:200px;height:200px;}
+    section{padding:68px 0;}
+    .mission-grid{grid-template-columns:1fr;}
+    .program-grid{grid-template-columns:1fr;}
+    .social-card{
+      grid-template-columns:1fr;
+      text-align:center;
+      padding:30px 24px;
+    }
+    .social-icon{margin:0 auto;}
+    .contact-cell{padding:26px 24px;}
+    .construction{padding:48px 24px;}
+    .footer-row{flex-direction:column; align-items:flex-start;}
+  }
+
+  .page-hero{padding:58px 0 34px;background:var(--paper);border-bottom:1px solid var(--line)}
+  .page-hero .section-num{margin-bottom:12px}
+  .page-hero h1{font-size:clamp(30px,5vw,48px)}
+  body:not(.page-about) main>section{min-height:calc(100vh - 244px)}
+  .skip-link{position:absolute;left:-999px;top:8px;background:#fff;padding:10px 14px;z-index:999}
+  .skip-link:focus{left:8px}
+  .official-domain{background:var(--green);color:#fff;padding:11px 0;font-size:13px;text-align:center}
+  .official-domain strong{color:#fff}
+  .legal-identity{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--green);padding:20px 24px;margin:28px 0 0;border-radius:var(--radius)}
+  .legal-identity h3{font-size:18px;margin-bottom:8px}
+  .legal-identity p{color:var(--ink-soft)}
+  .statement-card{background:var(--green-tint);border:1px solid rgba(76,122,61,.22);padding:28px 30px;border-radius:var(--radius);font-size:18px;line-height:2}
+  .activity-photo{margin:0 0 34px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .activity-photo img{width:100%;max-height:540px;object-fit:cover}
+  .activity-photo figcaption{padding:12px 16px;color:var(--ink-soft);font-size:13px}
+  .activity-grid{margin-top:0}
+  .activity-tag{display:inline-block;margin-top:18px;color:var(--green);font-size:13px;font-weight:700}
+  .activity-follow{margin-top:34px;padding:32px;background:var(--yellow-tint);border:1px solid rgba(239,175,18,.28);text-align:center;border-radius:var(--radius)}
+  .activity-follow p{margin:10px auto 20px;color:var(--ink-soft)}
+  .footer-legal{width:100%;padding-top:14px;margin-top:14px;border-top:1px solid rgba(255,255,255,.16);font-size:12px;line-height:1.7}
+  @media(max-width:760px){.brand-text{font-size:14px}.brand-text small{display:none}.page-hero{padding:38px 0 18px}}
+
+  .official-domain{background:#f3f7f0;color:var(--green);border-bottom:1px solid rgba(76,122,61,.16);padding:9px 0;font-size:13px;text-align:center}
+  .future-section{margin-top:64px;padding:44px;background:var(--green-tint);border:1px solid rgba(76,122,61,.2);border-radius:var(--radius)}
+  .future-section h3{font-size:28px;margin-bottom:8px}.future-section>p{color:var(--ink-soft);margin-bottom:24px}
+  .future-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .future-list li{background:#fff;padding:16px 18px;border-left:3px solid var(--green);box-shadow:0 8px 24px -22px rgba(0,0,0,.5)}
+  .proof-strip,.program-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:42px}
+  .proof-strip figure,.program-photo-strip figure,.impact-gallery figure{margin:0;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}
+  .proof-strip img,.program-photo-strip img{width:100%;height:220px;object-fit:cover}
+  figure figcaption{padding:12px 14px;color:var(--ink-soft);font-size:13px}
+  .impact-intro{max-width:780px;font-size:17px;color:var(--ink-soft);margin-bottom:34px}
+  .impact-block{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;margin:0 0 56px;padding-bottom:56px;border-bottom:1px solid var(--line)}
+  .impact-block.reverse{grid-template-columns:.95fr 1.05fr}.impact-block.reverse .impact-copy{order:2}.impact-block.reverse figure{order:1}
+  .impact-block figure{margin:0}.impact-block figure img{width:100%;max-height:420px;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow)}
+  .impact-kicker{font-family:'JetBrains Mono',monospace;color:var(--clay);font-size:12px;letter-spacing:.12em}
+  .impact-copy h3{font-size:28px;margin:8px 0 14px}.impact-copy p+p{margin-top:12px}
+  .tea-charity{padding:34px;background:var(--yellow-tint);border:1px solid rgba(239,175,18,.3);border-radius:var(--radius);margin-bottom:52px}
+  .tea-charity h3{font-size:27px;margin-bottom:12px}.tea-charity p{max-width:880px}
+  .impact-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .impact-gallery img{width:100%;height:300px;object-fit:cover}
+  .impact-gallery .portrait img{object-fit:contain;background:#fbf8f2}
+  .map-wrap{margin-top:28px;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow);overflow:hidden}
+  .map-wrap iframe{display:block;width:100%;height:420px;border:0}.map-caption{padding:15px 18px;color:var(--ink-soft);font-size:14px}
+  @media(max-width:860px){.impact-block,.impact-block.reverse{grid-template-columns:1fr}.impact-block.reverse .impact-copy,.impact-block.reverse figure{order:initial}.impact-gallery{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:700px){.future-section{padding:28px 22px}.future-list,.proof-strip,.program-photo-strip,.impact-gallery{grid-template-columns:1fr}.proof-strip img,.program-photo-strip img,.impact-gallery img{height:auto}.map-wrap iframe{height:330px}}
+
+
+  /* ---------- 最新消息卡片 ---------- */
+  .news-list{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .news-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);}
+  .news-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--yellow-tint);}
+  .news-card .body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .news-tag{align-self:flex-start;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--green-tint);color:var(--green);}
+  .news-tag.course{background:var(--clay-tint);color:var(--clay);}
+  .news-tag.ended{background:#eee;color:#777;}
+  .news-card h3{font-size:19px;line-height:1.45;color:var(--ink);}
+  .news-meta{list-style:none;padding:0;margin:0;font-size:14px;color:var(--ink-soft);display:grid;gap:4px;}
+  .news-meta b{color:var(--ink);font-weight:700;margin-right:6px;}
+  .news-card .summary{font-size:14.5px;color:var(--ink-soft);}
+  .ext-note{font-size:13px;color:var(--ink-soft);margin:14px 0 0;}
+    .btn-disabled{background:#eee;color:#777;cursor:default;border-color:transparent;}
+  .btn-disabled:hover{transform:none;}
+  .news-tag.draft{background:#262420;color:#fff;}
+  .news-tag + .news-tag{margin-left:6px;}
+  .news-card .actions{margin-top:auto;padding-top:8px;display:flex;gap:10px;flex-wrap:wrap;}
+  .news-card .btn{padding:10px 20px;font-size:14px;}
+  .btn-line{border-color:var(--line);color:var(--ink);background:#fff;}
+  .btn-line:hover{border-color:var(--clay);color:var(--clay);}
+  .news-empty{padding:28px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--ink-soft);}
+  .news-detail{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;margin-top:28px;display:grid;grid-template-columns:320px 1fr;gap:30px;scroll-margin-top:100px;}
+  .news-detail img{width:100%;border-radius:var(--radius);display:block;}
+  .news-detail h2{font-size:clamp(22px,3vw,28px);margin:10px 0 14px;}
+  .news-detail .content{margin-top:16px;line-height:1.9;color:var(--ink);}
+  .news-detail .content p{margin:0 0 12px;}
+  .news-detail .content img{max-width:100%;height:auto;}
+  .news-detail .actions{margin-top:18px;}
+  .news-detail.no-img{grid-template-columns:1fr;}
+  .latest-news{background:var(--paper);}
+  .latest-news .more{margin-top:28px;text-align:center;}
+  .programs-cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;padding:26px;background:var(--yellow-tint);border-radius:var(--radius);text-align:center;}
+  .programs-cta p{margin:0;font-weight:700;color:var(--ink);}
+  @media (max-width:920px){ .news-list{grid-template-columns:repeat(2,1fr);} .news-detail{grid-template-columns:1fr;} }
+  @media (max-width:640px){ .news-list{grid-template-columns:1fr;} .news-detail{padding:22px;} }
+
+  /* ---------- 報名按鈕 / 最新消息 ---------- */
+  .nav-cta{
+    flex:none;margin-left:10px;display:inline-flex;align-items:center;gap:6px;
+    padding:10px 20px;border-radius:99px;background:var(--clay);color:#fff !important;
+    font-size:14.5px;font-weight:700;text-decoration:none;white-space:nowrap;
+    box-shadow:0 8px 20px -10px rgba(178,59,34,.7);
+    transition:background .25s var(--ease), transform .25s var(--ease);
+  }
+  .nav-cta:hover{background:#94301b;transform:translateY(-1px);}
+  @media (max-width:1180px){ .nav-links{gap:2px;} .nav-links a{padding:10px 9px;font-size:14px;} .nav-links a::after{left:9px;right:9px;} }
+  @media (max-width:1000px){ .brand-text small{display:none;} .brand-text{font-size:15px;} }
+  @media (max-width:900px) and (min-width:721px){ .brand-text{display:none;} }
+  @media (max-width:720px){
+    .nav-cta{order:2;margin-left:auto;margin-right:10px;padding:8px 14px;font-size:14px;}
+    .nav-toggle{order:3;}
+  }
+  @media (max-width:400px){ .brand-text{font-size:13px;} .nav-cta{padding:8px 11px;margin-right:6px;} .brand{gap:8px;} }
+
+  /* ---------- Facebook 按鈕 ---------- */
+  .nav-fb{flex:none;margin-left:12px;width:40px;height:40px;border-radius:50%;background:#1877F2;color:#fff;display:inline-flex;align-items:center;justify-content:center;transition:transform .25s var(--ease), background .25s var(--ease);}
+  @media (min-width:721px){ .nav-links{margin-left:auto;} }
+  .nav-fb:hover{background:#0f5fd0;transform:translateY(-1px);}
+  .nav-fb svg{width:22px;height:22px;}
+  .footer-fb{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:700;text-decoration:none;font-family:'Noto Sans TC', sans-serif;font-size:13.5px;}
+  .footer-fb span.ic{width:30px;height:30px;border-radius:50%;background:#1877F2;color:#fff;display:inline-flex;align-items:center;justify-content:center;}
+  .footer-fb svg{width:17px;height:17px;}
+  .footer-fb:hover{color:#1877F2;}
+  .contact-social{margin-top:40px;}
+  @media (max-width:720px){ .nav-fb{order:2;margin-left:auto;width:36px;height:36px;} .nav-fb svg{width:20px;height:20px;} .nav-cta{margin-left:8px;} }
+  @media (max-width:400px){ .nav-fb{width:34px;height:34px;} .nav-cta{margin-left:6px;} }
+  .page-hero .crumb{margin:0 0 8px;font-size:15px;}
+  .page-hero .crumb a{color:inherit;opacity:.8;text-decoration:none;}
+  .page-hero h1{font-size:clamp(24px,4vw,38px);}
+  .news-single{margin-top:0;}
+  .back-row{margin-top:28px;text-align:center;}
+  </style>
+</head>
+<body class="page-contact">
+  <a class="skip-link" href="#main">跳至主要內容</a>
+  <header class="site-header">
+    <div class="container nav-row">
+      <a href="/index.html" class="brand">
+        <img class="brand-mark" src="/assets/images/logo.png" alt="南投縣手工藝發展協會 LOGO">
+        <span class="brand-text">社團法人南投縣手工藝發展協會<small>Nantou Craft Association</small></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="開啟選單" aria-expanded="false"><span></span></button>
+      <nav class="nav-links" id="navLinks" aria-label="主要導覽"><a href="/index.html">關於本協會</a>
+        <a href="/news.html" class="active" aria-current="page">最新消息</a>
+        <a href="/programs.html">推廣項目</a>
+        <a href="/impact.html">成果與公益</a>
+        <a href="/contact.html">聯絡我們</a></nav>
+      <a href="https://www.facebook.com/Carft.Assn/?locale=zh_TW" class="nav-fb" target="_blank" rel="noopener" aria-label="協會 Facebook 粉絲專頁（另開視窗）" title="Facebook 粉絲專頁"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z" fill="currentColor"/></svg></a>
+      <a href="/signup.html" class="nav-cta">我要報名</a>
+    </div>
+  </header>
+  <div class="official-domain"><div class="container">本網站（ntcraft.org）為社團法人南投縣手工藝發展協會官方網站</div></div>
+  
+    <div class="page-hero">
+      <div class="container">
+        <p class="crumb"><a href="/news.html">← 最新消息</a></p>
+        <h1>{{ page.title }}</h1>
+      </div>
+    </div>
+  <main id="main"><section class="news" id="news">
+    <div class="container">
+      {% assign n = page %}{% assign ext = '' %}{% if n.signup_url and n.signup_url != '' %}{% assign ext = n.signup_url %}{% elsif n.course_code and n.course_code != '' %}{% capture ext %}https://ojt.wda.gov.tw/ClassSearch/Detail?OCID={{ n.course_code | strip }}&plantype=1{% endcapture %}{% endif %}
+      <article class="news-detail news-single{% unless n.poster and n.poster != "" %} no-img{% endunless %}" data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}" data-signup-start="{{ n.signup_start | date: '%Y-%m-%d' }}" data-signup-end="{{ n.signup_end | date: '%Y-%m-%d' }}">
+        {% if n.poster and n.poster != '' %}<img src="{{ n.poster }}" alt="{{ n.title | escape }}">{% endif %}
+        <div>
+          <span class="news-tag{% if n.category == '課程' %} course{% endif %}">{{ n.category | default: "消息" }}</span>
+          <ul class="news-meta">
+            {% if n.event_date and n.event_date != '' %}<li><b>日期</b>{{ n.event_date | date: "%Y/%m/%d" }}{% if n.event_end and n.event_end != "" and n.event_end != n.event_date %} – {{ n.event_end | date: "%Y/%m/%d" }}{% endif %}{% if n.event_time and n.event_time != '' %}　{{ n.event_time }}{% endif %}</li>{% endif %}
+            {% if n.location and n.location != '' %}<li><b>地點</b>{{ n.location }}</li>{% endif %}
+            {% if n.fee and n.fee != '' %}<li><b>費用</b>{{ n.fee }}</li>{% endif %}
+            {% if n.signup_end and n.signup_end != '' %}<li><b>報名</b>{% if n.signup_start and n.signup_start != '' %}{{ n.signup_start | date: "%Y/%m/%d" }} – {% else %}即日起至 {% endif %}{{ n.signup_end | date: "%Y/%m/%d" }}</li>{% elsif n.signup_start and n.signup_start != '' %}<li><b>報名</b>{{ n.signup_start | date: "%Y/%m/%d" }} 起</li>{% endif %}
+            {% if n.course_code and n.course_code != '' %}<li><b>課程代碼</b>{{ n.course_code }}</li>{% endif %}
+            <li><b>發布</b>{{ n.date | date: "%Y/%m/%d" }}</li>
+          </ul>
+          <div class="content">{{ content }}</div>
+          {% if ext != '' %}<p class="ext-note">本課程需至主辦單位官方網站報名，點按鈕會另開新視窗。</p>{% endif %}
+          <div class="actions">{% if ext != '' %}<a class="btn btn-primary js-signup" href="{{ ext }}" target="_blank" rel="noopener" data-track="external_signup" data-course="{{ n.title | escape }}">{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}報名/簡章下載{% endif %} ↗</a>{% elsif n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="/signup.html?course={{ n.title | url_encode }}" data-track="signup_course" data-course="{{ n.title | escape }}">報名這堂課</a>{% endif %}</div>
+          {% include share.html url=page.url title=page.title %}
+        </div>
+      </article>
+      <p class="back-row"><a class="btn btn-line" href="/news.html">看全部最新消息</a></p>
+    </div>
+  </section></main>
+  <footer><div class="container footer-row">
+    <span>© <span id="year"></span> 社團法人南投縣手工藝發展協會 All Rights Reserved.</span>
+    <span>南投縣南投市民族路609巷29號2樓｜049-2203321</span>
+    <a href="https://www.facebook.com/Carft.Assn/?locale=zh_TW" class="footer-fb" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z" fill="currentColor"/></svg></span>Facebook 粉絲專頁</a>
+    <span class="footer-legal">本會立案日期：民國94年11月5日｜立案字號：府社政字第09402359210號｜統一編號：09245913<br>官方網站：ntcraft.org｜本網站由社團法人南投縣手工藝發展協會管理與維護</span>
+  </div></footer>
+  <script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+    }), { threshold: .12 });
+    revealEls.forEach(el => io.observe(el));
+  } else revealEls.forEach(el => el.classList.add('in'));
+  document.querySelectorAll('.copy-btn').forEach(btn => btn.addEventListener('click', async () => {
+    const value = btn.getAttribute('data-copy');
+    try {
+      await navigator.clipboard.writeText(value);
+      const old = btn.textContent; btn.textContent = '已複製 ✓'; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = old; btn.classList.remove('copied'); }, 1800);
+    } catch { window.prompt('請手動複製：', value); }
+  }));
+
+  // 活動日期過了就自動標「已結束」並隱藏報名按鈕
+  (function(){
+    const today = new Date(); today.setHours(0,0,0,0);
+    document.querySelectorAll('[data-end]').forEach(el => {
+      const d = el.getAttribute('data-end'); if (!d) return;
+      const end = new Date(d + 'T23:59:59');
+      if (end < today) {
+        const tag = el.querySelector('.news-tag'); if (tag) { tag.textContent = '已結束'; tag.className = 'news-tag ended'; }
+        el.querySelectorAll('.js-signup').forEach(b => b.remove());
+      }
+    });
+  })();
+
+  // 依報名起訖日：還沒開始→顯示開放日期；已截止→顯示「報名已截止」
+  (function(){
+    const today = new Date(); today.setHours(0,0,0,0);
+    const fmt = d => d.replace(/-/g, '/');
+    document.querySelectorAll('[data-signup-start],[data-signup-end]').forEach(el => {
+      const s = el.getAttribute('data-signup-start'), e = el.getAttribute('data-signup-end');
+      let msg = '';
+      if (e && new Date(e + 'T23:59:59') < today) msg = '報名已截止';
+      else if (s && new Date(s + 'T00:00:00') > today) msg = fmt(s) + ' 開放報名';
+      if (!msg) return;
+      el.querySelectorAll('.js-signup').forEach(b => {
+        const span = document.createElement('span');
+        span.className = 'btn btn-disabled'; span.textContent = msg; b.replaceWith(span);
+      });
+    });
+  })();
+</script>
+
+<script>
+  // 追蹤所有按鈕與重要連結點擊 → GTM 自訂事件 cta_click
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('a.btn, button.btn, .nav-cta, .nav-fb, .footer-fb, .social-card, [data-track]');
+    if (!el) return;
+    var href = el.getAttribute('href') || '';
+    var type = el.getAttribute('data-track') ||
+      (el.classList.contains('nav-cta') ? 'header_signup' :
+       el.classList.contains('nav-fb') ? 'header_facebook' :
+       el.classList.contains('footer-fb') ? 'footer_facebook' :
+       el.classList.contains('social-card') ? 'contact_facebook' :
+       el.type === 'submit' ? 'form_submit_button' : 'button');
+    var text = (el.getAttribute('aria-label') || el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'cta_click',
+      cta_type: type,
+      cta_text: text,
+      course_name: el.getAttribute('data-course') || '',
+      link_url: href ? new URL(href, location.href).href : '',
+      outbound: !!href && new URL(href, location.href).host !== location.host
+    });
+  });
+</script>
+{% include news-extras.html %}
+</body>
+</html>

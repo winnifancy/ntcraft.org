@@ -802,7 +802,9 @@ layout: null
   .contact-social{margin-top:40px;}
   @media (max-width:720px){ .nav-fb{order:2;margin-left:auto;width:36px;height:36px;} .nav-fb svg{width:20px;height:20px;} .nav-cta{margin-left:8px;} }
   @media (max-width:400px){ .nav-fb{width:34px;height:34px;} .nav-cta{margin-left:6px;} }
-</style>
+  .news-title-link{color:inherit;text-decoration:none;}
+  .news-title-link:hover{text-decoration:underline;text-underline-offset:4px;}
+  </style>
 </head>
 <body class="page-contact">
   <a class="skip-link" href="#main">跳至主要內容</a>
@@ -854,7 +856,7 @@ layout: null
           </ul>
           <div class="content">{{ n.content }}</div>
           {% if ext != '' %}<p class="ext-note">本課程需至主辦單位官方網站報名，點按鈕會另開新視窗。</p>{% endif %}
-          <div class="actions">{% if ext != '' %}<a class="btn btn-primary js-signup" href="{{ ext }}" target="_blank" rel="noopener" data-track="external_signup" data-course="{{ n.title | escape }}">{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}前往職訓局報名{% endif %} ↗</a>{% elsif n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}" data-track="signup_course" data-course="{{ n.title | escape }}">報名這堂課</a>{% endif %}</div>
+          <div class="actions">{% if ext != '' %}<a class="btn btn-primary js-signup" href="{{ ext }}" target="_blank" rel="noopener" data-track="external_signup" data-course="{{ n.title | escape }}">{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}報名/簡章下載{% endif %} ↗</a>{% elsif n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}" data-track="signup_course" data-course="{{ n.title | escape }}">報名這堂課</a>{% endif %}</div>
         </div>
       </article>
       {% endfor %}
@@ -951,5 +953,6 @@ layout: null
     });
   });
 </script>
+{% include news-extras.html %}
 </body>
 </html>
