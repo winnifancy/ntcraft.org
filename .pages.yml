@@ -83,7 +83,7 @@ content:
         label: 外部報名網址（非職訓局的外部報名才需要填；有填會優先使用）
         type: string
       - name: signup_label
-        label: 外部報名按鈕文字（留空＝「前往職訓局報名」）
+        label: 外部報名按鈕文字（留空＝「報名/簡章下載」）
         type: string
       - name: signup_start
         label: 報名開始日（留空＝現在就開放）
