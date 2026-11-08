@@ -6,6 +6,12 @@ on:
     branches: [main]
     paths:
       - 'assets/images/**'
+      - '_news/**'
+
+# 同時只跑一個，避免兩次存檔互相搶
+concurrency:
+  group: compress-images
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -36,6 +42,7 @@ jobs:
           fi
           xargs -0 -r python .github/scripts/compress_images.py < files.txt
           rm files.txt
+          python .github/scripts/fix_image_refs.py
 
       - name: 存回 GitHub
         id: commit
@@ -46,6 +53,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "自動壓縮圖片"
           git pull --rebase origin main
+          # 壓縮期間如果老師剛好存了消息（還寫著舊的 .png），再修一次連結
+          python .github/scripts/fix_image_refs.py
+          git add -A _news *.html _data
+          git diff --cached --quiet || git commit -m "修正圖片連結（.png → .webp）"
           git push origin HEAD:main
           echo "pushed=true" >> "$GITHUB_OUTPUT"
 
