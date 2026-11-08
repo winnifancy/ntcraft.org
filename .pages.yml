@@ -1,4 +1,13 @@
 # Pages CMS 後台設定（https://app.pagescms.org）
+settings:
+  commit:
+    identity: user
+    templates:
+      create: "Create {path} (via Pages CMS) by {userEmail}"
+      update: "Update {path} (via Pages CMS) by {userEmail}"
+      delete: "Delete {path} (via Pages CMS) by {userEmail}"
+      rename: "Rename {oldPath} to {newPath} (via Pages CMS) by {userEmail}"
+
 media:
   input: assets/images/news
   output: /assets/images/news
@@ -89,8 +98,9 @@ content:
         options:
           format: yyyy-MM-dd
       - name: author
-        label: 發文老師
+        label: 發文老師（第一次存檔後系統自動填入，不用填）
         type: string
+        readonly: true
       - name: draft
         label: 存成草稿（打勾＝只在預覽頁 ntcraft.org/preview.html 看得到，正式網站不顯示）
         type: boolean
@@ -98,3 +108,19 @@ content:
       - name: body
         label: 詳細內容
         type: rich-text
+
+  - name: teachers
+    label: 老師名單（Email 對應姓名）
+    type: file
+    path: _data/teachers.yml
+    format: yaml
+    list: true
+    fields:
+      - name: email
+        label: 登入用的 Email
+        type: string
+        required: true
+      - name: name
+        label: 顯示的老師姓名
+        type: string
+        required: true
