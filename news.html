@@ -746,6 +746,7 @@ layout: null
   .news-meta{list-style:none;padding:0;margin:0;font-size:14px;color:var(--ink-soft);display:grid;gap:4px;}
   .news-meta b{color:var(--ink);font-weight:700;margin-right:6px;}
   .news-card .summary{font-size:14.5px;color:var(--ink-soft);}
+  .ext-note{font-size:13px;color:var(--ink-soft);margin:14px 0 0;}
   .news-card .actions{margin-top:auto;padding-top:8px;display:flex;gap:10px;flex-wrap:wrap;}
   .news-card .btn{padding:10px 20px;font-size:14px;}
   .btn-line{border-color:var(--line);color:var(--ink);background:#fff;}
@@ -832,7 +833,7 @@ layout: null
       </div>
       {% assign items = site.news | sort: "date" | reverse %}
       {% if items.size == 0 %}<p class="news-empty">目前沒有新的消息，歡迎<a href="signup.html">填寫報名表</a>告訴我們你想上的課程。</p>{% endif %}
-      {% for n in items %}
+      {% for n in items %}{% assign ext = '' %}{% if n.signup_url and n.signup_url != '' %}{% assign ext = n.signup_url %}{% elsif n.course_code and n.course_code != '' %}{% capture ext %}https://ojt.wda.gov.tw/ClassSearch/Detail?OCID={{ n.course_code | strip }}&plantype=1{% endcapture %}{% endif %}
       <article class="news-detail{% unless n.poster and n.poster != "" %} no-img{% endunless %}" id="{{ n.id | split: '/' | last }}" data-end="{{ n.event_end | default: n.event_date | date: '%Y-%m-%d' }}">
         {% if n.poster and n.poster != '' %}<img src="{{ n.poster | relative_url }}" alt="{{ n.title | escape }}" loading="lazy">{% endif %}
         <div>
@@ -842,10 +843,12 @@ layout: null
             {% if n.event_date and n.event_date != '' %}<li><b>日期</b>{{ n.event_date | date: "%Y/%m/%d" }}{% if n.event_end and n.event_end != "" and n.event_end != n.event_date %} – {{ n.event_end | date: "%Y/%m/%d" }}{% endif %}{% if n.event_time and n.event_time != '' %}　{{ n.event_time }}{% endif %}</li>{% endif %}
             {% if n.location and n.location != '' %}<li><b>地點</b>{{ n.location }}</li>{% endif %}
             {% if n.fee and n.fee != '' %}<li><b>費用</b>{{ n.fee }}</li>{% endif %}
+              {% if n.course_code and n.course_code != '' %}<li><b>課程代碼</b>{{ n.course_code }}</li>{% endif %}
             <li><b>發布</b>{{ n.date | date: "%Y/%m/%d" }}</li>
           </ul>
           <div class="content">{{ n.content }}</div>
-          {% if n.signup and n.signup != '' %}<div class="actions"><a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}">報名這堂課</a></div>{% endif %}
+          {% if ext != '' %}<p class="ext-note">本課程需至主辦單位官方網站報名，點按鈕會另開新視窗。</p>{% endif %}
+          <div class="actions">{% if ext != '' %}<a class="btn btn-primary js-signup" href="{{ ext }}" target="_blank" rel="noopener" data-track="external_signup" data-course="{{ n.title | escape }}">{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}前往職訓局報名{% endif %} ↗</a>{% elsif n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}" data-track="signup_course" data-course="{{ n.title | escape }}">報名這堂課</a>{% endif %}</div>
         </div>
       </article>
       {% endfor %}
@@ -899,6 +902,31 @@ layout: null
       }
     });
   })();
+</script>
+
+<script>
+  // 追蹤所有按鈕與重要連結點擊 → GTM 自訂事件 cta_click
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('a.btn, button.btn, .nav-cta, .nav-fb, .footer-fb, .social-card, [data-track]');
+    if (!el) return;
+    var href = el.getAttribute('href') || '';
+    var type = el.getAttribute('data-track') ||
+      (el.classList.contains('nav-cta') ? 'header_signup' :
+       el.classList.contains('nav-fb') ? 'header_facebook' :
+       el.classList.contains('footer-fb') ? 'footer_facebook' :
+       el.classList.contains('social-card') ? 'contact_facebook' :
+       el.type === 'submit' ? 'form_submit_button' : 'button');
+    var text = (el.getAttribute('aria-label') || el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'cta_click',
+      cta_type: type,
+      cta_text: text,
+      course_name: el.getAttribute('data-course') || '',
+      link_url: href ? new URL(href, location.href).href : '',
+      outbound: !!href && new URL(href, location.href).host !== location.host
+    });
+  });
 </script>
 </body>
 </html>

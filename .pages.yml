@@ -63,9 +63,18 @@ content:
         label: 簡短介紹（顯示在卡片上，1～2 句）
         type: text
       - name: signup
-        label: 開放線上報名（打勾會出現「報名這堂課」按鈕）
+        label: 開放報名（打勾會出現報名按鈕；有填外部報名網址就連到外部）
         type: boolean
         default: true
+      - name: course_code
+        label: 職訓局課程代碼（例如 174414；填了會自動連到職訓局報名頁）
+        type: string
+      - name: signup_url
+        label: 外部報名網址（非職訓局的外部報名才需要填；有填會優先使用）
+        type: string
+      - name: signup_label
+        label: 外部報名按鈕文字（留空＝「前往職訓局報名」）
+        type: string
       - name: published
         label: 顯示在網站上（取消打勾＝先存草稿）
         type: boolean
