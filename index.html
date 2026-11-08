@@ -748,6 +748,7 @@ layout: null
   .news-meta{list-style:none;padding:0;margin:0;font-size:14px;color:var(--ink-soft);display:grid;gap:4px;}
   .news-meta b{color:var(--ink);font-weight:700;margin-right:6px;}
   .news-card .summary{font-size:14.5px;color:var(--ink-soft);}
+  .ext-note{font-size:13px;color:var(--ink-soft);margin:0;}
   .news-card .actions{margin-top:auto;padding-top:8px;display:flex;gap:10px;flex-wrap:wrap;}
   .news-card .btn{padding:10px 20px;font-size:14px;}
   .btn-line{border-color:var(--line);color:var(--ink);background:#fff;}
@@ -857,9 +858,10 @@ layout: null
               {% if n.fee and n.fee != '' %}<li><b>費用</b>{{ n.fee }}</li>{% endif %}
             </ul>
             {% if n.summary and n.summary != '' %}<p class="summary">{{ n.summary }}</p>{% endif %}
+            {% if n.signup_url and n.signup_url != '' %}<p class="ext-note">本課程需至主辦單位官方網站報名，點按鈕會另開新視窗。</p>{% endif %}
             <div class="actions">
-              {% if n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}">報名這堂課</a>{% endif %}
-              <a class="btn btn-line" href="news.html#{{ n.id | split: '/' | last }}">看詳細</a>
+              {% if n.signup_url and n.signup_url != '' %}<a class="btn btn-primary js-signup" href="{{ n.signup_url }}" target="_blank" rel="noopener" data-track="external_signup" data-course="{{ n.title | escape }}">{% if n.signup_label and n.signup_label != '' %}{{ n.signup_label }}{% else %}前往職訓局報名{% endif %} ↗</a>{% elsif n.signup and n.signup != '' %}<a class="btn btn-primary js-signup" href="signup.html?course={{ n.title | url_encode }}" data-track="signup_course" data-course="{{ n.title | escape }}">報名這堂課</a>{% endif %}
+              <a class="btn btn-line" href="news.html#{{ n.id | split: '/' | last }}" data-track="news_detail" data-course="{{ n.title | escape }}">看詳細</a>
             </div>
           </div>
         </article>{% endfor %}
@@ -989,6 +991,31 @@ layout: null
       }
     });
   })();
+</script>
+
+<script>
+  // 追蹤所有按鈕與重要連結點擊 → GTM 自訂事件 cta_click
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('a.btn, button.btn, .nav-cta, .nav-fb, .footer-fb, .social-card, [data-track]');
+    if (!el) return;
+    var href = el.getAttribute('href') || '';
+    var type = el.getAttribute('data-track') ||
+      (el.classList.contains('nav-cta') ? 'header_signup' :
+       el.classList.contains('nav-fb') ? 'header_facebook' :
+       el.classList.contains('footer-fb') ? 'footer_facebook' :
+       el.classList.contains('social-card') ? 'contact_facebook' :
+       el.type === 'submit' ? 'form_submit_button' : 'button');
+    var text = (el.getAttribute('aria-label') || el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'cta_click',
+      cta_type: type,
+      cta_text: text,
+      course_name: el.getAttribute('data-course') || '',
+      link_url: href ? new URL(href, location.href).href : '',
+      outbound: !!href && new URL(href, location.href).host !== location.host
+    });
+  });
 </script>
 </body>
 </html>

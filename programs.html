@@ -937,5 +937,30 @@
     } catch { window.prompt('請手動複製：', value); }
   }));
 </script>
+
+<script>
+  // 追蹤所有按鈕與重要連結點擊 → GTM 自訂事件 cta_click
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('a.btn, button.btn, .nav-cta, .nav-fb, .footer-fb, .social-card, [data-track]');
+    if (!el) return;
+    var href = el.getAttribute('href') || '';
+    var type = el.getAttribute('data-track') ||
+      (el.classList.contains('nav-cta') ? 'header_signup' :
+       el.classList.contains('nav-fb') ? 'header_facebook' :
+       el.classList.contains('footer-fb') ? 'footer_facebook' :
+       el.classList.contains('social-card') ? 'contact_facebook' :
+       el.type === 'submit' ? 'form_submit_button' : 'button');
+    var text = (el.getAttribute('aria-label') || el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'cta_click',
+      cta_type: type,
+      cta_text: text,
+      course_name: el.getAttribute('data-course') || '',
+      link_url: href ? new URL(href, location.href).href : '',
+      outbound: !!href && new URL(href, location.href).host !== location.host
+    });
+  });
+</script>
 </body>
 </html>
