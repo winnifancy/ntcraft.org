@@ -11,4 +11,19 @@ defaults:
       type: news
     values:
       layout: news-post
+  # 不放進網站地圖的頁面（預覽頁、舊網址轉址頁、驗證檔、舊備份）
+  - scope: { path: "preview.html" }
+    values: { sitemap: false }
+  - scope: { path: "social.html" }
+    values: { sitemap: false }
+  - scope: { path: "mission.html" }
+    values: { sitemap: false }
+  - scope: { path: "index-2.html" }
+    values: { sitemap: false }
+  - scope: { path: "googlee276127f63b789ae.html" }
+    values: { sitemap: false }
 exclude: [README.md, Gemfile, Gemfile.lock, node_modules, vendor]
+
+# 網站地圖：自動產生 /sitemap.xml（含每則消息），給 Google Search Console
+plugins:
+  - jekyll-sitemap
