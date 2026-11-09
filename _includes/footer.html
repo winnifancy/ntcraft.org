@@ -1,0 +1,63 @@
+{%- comment -%} 全站共用頁尾與共用程式（選單開關、按鈕點擊追蹤）。地址、電話等文字在 _data/site.yml。 {%- endcomment -%}
+{%- assign s = site.data.site -%}
+  <footer><div class="container footer-row">
+    <span>© <span id="year"></span> 社團法人南投縣手工藝發展協會 All Rights Reserved.</span>
+    <span>{{ s.address }}｜{{ s.phone }}</span>
+    <a href="{{ s.facebook }}" class="footer-fb" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z" fill="currentColor"/></svg></span>Facebook 粉絲專頁</a>
+    <span class="footer-legal">{{ s.legal }}<br>{{ s.legal_2 }}</span>
+  </div></footer>
+  <script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+    }), { threshold: .12 });
+    revealEls.forEach(el => io.observe(el));
+  } else revealEls.forEach(el => el.classList.add('in'));
+  document.querySelectorAll('.copy-btn').forEach(btn => btn.addEventListener('click', async () => {
+    const value = btn.getAttribute('data-copy');
+    try {
+      await navigator.clipboard.writeText(value);
+      const old = btn.textContent; btn.textContent = '已複製 ✓'; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = old; btn.classList.remove('copied'); }, 1800);
+    } catch { window.prompt('請手動複製：', value); }
+  }));
+</script>
+
+<script>
+  // 追蹤所有按鈕與重要連結點擊 → GTM 自訂事件 cta_click
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('a.btn, button.btn, .nav-cta, .nav-fb, .footer-fb, .social-card, [data-track]');
+    if (!el) return;
+    var href = el.getAttribute('href') || '';
+    var type = el.getAttribute('data-track') ||
+      (el.classList.contains('nav-cta') ? 'header_signup' :
+       el.classList.contains('nav-fb') ? 'header_facebook' :
+       el.classList.contains('footer-fb') ? 'footer_facebook' :
+       el.classList.contains('social-card') ? 'contact_facebook' :
+       el.type === 'submit' ? 'form_submit_button' : 'button');
+    var text = (el.getAttribute('aria-label') || el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'cta_click',
+      cta_type: type,
+      cta_text: text,
+      course_name: el.getAttribute('data-course') || '',
+      link_url: href ? new URL(href, location.href).href : '',
+      outbound: !!href && new URL(href, location.href).host !== location.host
+    });
+  });
+</script>

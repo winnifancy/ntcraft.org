@@ -124,3 +124,44 @@ content:
         label: 顯示的老師姓名
         type: string
         required: true
+
+  - name: site
+    label: 網站設定（選單、頁首按鈕、頁尾）
+    type: file
+    path: _data/site.yml
+    format: yaml
+    fields:
+      - name: nav
+        label: 上方選單（可調整順序、新增或刪除；網址以 / 開頭，例如 /news.html）
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: 選單文字
+            type: string
+            required: true
+          - name: url
+            label: 連結網址
+            type: string
+            required: true
+      - name: cta_label
+        label: 頁首紅色按鈕文字（按鈕會自動連到最新一則可報名課程）
+        type: string
+      - name: facebook
+        label: Facebook 粉絲專頁網址
+        type: string
+      - name: official_notice
+        label: 頁首下方的官方網站說明列
+        type: string
+      - name: address
+        label: 頁尾地址
+        type: string
+      - name: phone
+        label: 頁尾電話
+        type: string
+      - name: legal
+        label: 頁尾立案資料（第一行）
+        type: string
+      - name: legal_2
+        label: 頁尾說明（第二行）
+        type: string

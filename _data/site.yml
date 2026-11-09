@@ -1,0 +1,19 @@
+# 網站共用資料：選單、頁首按鈕、頁尾（可在 Pages CMS 後台「網站設定」修改）
+nav:
+  - label: 關於本協會
+    url: /index.html
+  - label: 最新消息
+    url: /news.html
+  - label: 推廣項目
+    url: /programs.html
+  - label: 成果與公益
+    url: /impact.html
+  - label: 聯絡我們
+    url: /contact.html
+cta_label: 最新課程
+facebook: https://www.facebook.com/Carft.Assn/?locale=zh_TW
+official_notice: 本網站（ntcraft.org）為社團法人南投縣手工藝發展協會官方網站
+address: 南投縣南投市民族路609巷29號2樓
+phone: 0921-399 913
+legal: 本會立案日期：民國94年11月5日｜立案字號：府社政字第09402359210號｜統一編號：09245913
+legal_2: 官方網站：ntcraft.org｜本網站由社團法人南投縣手工藝發展協會管理與維護
