@@ -11,14 +11,12 @@ defaults:
       type: news
     values:
       layout: news-post
-  # 不放進網站地圖的頁面（預覽頁、舊網址轉址頁、驗證檔、舊備份）
+  # 不放進網站地圖的頁面（預覽頁、舊網址轉址頁、驗證檔）
   - scope: { path: "preview.html" }
     values: { sitemap: false }
   - scope: { path: "social.html" }
     values: { sitemap: false }
   - scope: { path: "mission.html" }
-    values: { sitemap: false }
-  - scope: { path: "index-2.html" }
     values: { sitemap: false }
   - scope: { path: "googlee276127f63b789ae.html" }
     values: { sitemap: false }
