@@ -132,7 +132,7 @@ content:
     format: yaml
     fields:
       - name: nav
-        label: 上方選單（可調整順序、新增或刪除；網址以 / 開頭，例如 /news.html）
+        label: 上方選單（可調整順序、新增或刪除；網址以 / 開頭，例如 /news.html；首頁用 /）
         type: object
         list: true
         fields:

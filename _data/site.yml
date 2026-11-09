@@ -1,7 +1,7 @@
 # 網站共用資料：選單、頁首按鈕、頁尾（可在 Pages CMS 後台「網站設定」修改）
 nav:
   - label: 關於本協會
-    url: /index.html
+    url: /
   - label: 最新消息
     url: /news.html
   - label: 推廣項目

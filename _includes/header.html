@@ -4,11 +4,10 @@
 {%- endcomment -%}
 {%- assign s = site.data.site -%}
 {%- assign cur = include.active | default: page.url -%}
-{%- if cur == "/" -%}{%- assign cur = "/index.html" -%}{%- endif -%}
   <a class="skip-link" href="#main">跳至主要內容</a>
   <header class="site-header">
     <div class="container nav-row">
-      <a href="/index.html" class="brand">
+      <a href="/" class="brand">
         <img class="brand-mark" src="/assets/images/logo.png" alt="南投縣手工藝發展協會 LOGO">
         <span class="brand-text">社團法人南投縣手工藝發展協會<small>Nantou Craft Association</small></span>
       </a>
